@@ -1,0 +1,15 @@
+{
+  "name": "apfel",
+  "description": "Prüft Browser-Dialoge für die Arbeit am Schreibtisch in drei Baugruppen (Motor, Fahrwerk, Bremse) gegen Apples Human Interface Guidelines, live geladen, und gegen den Maßstab des eigenen Projekts. Bericht als Kontaktabzug, auf Wunsch als Befundzeichnung.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Hans M."
+  },
+  "skills": [
+    "./skills/"
+  ],
+  "homepage": "https://github.com/rdo2hellowelt/apfelkern",
+  "repository": "https://github.com/rdo2hellowelt/apfelkern",
+  "license": "MIT",
+  "keywords": ["review", "ui", "dialog", "hig", "accessibility", "deutsch"]
+}

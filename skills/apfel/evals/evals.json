@@ -1,0 +1,71 @@
+{
+  "skill_name": "apfel",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "apfel: schau dir den Auftragsdialog auf meinem Zweig an",
+      "expected_output": "Skill greift über den Kurznamen. Sucht das Profil: zuerst .apfel/profil.md im Repo, dann ~/Documents/Apfel/profile/. Passt eins, Stände wie im Profil und Ref des Maßstabs nach dessen Regel, im Kopf genannt. beispiel.md gilt nie für ein echtes Repo.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "UI prüfen: die Einstellungsseite in diesem React-Projekt (ohne Profil)",
+      "expected_output": "Skill greift. Kein Profil passt: sucht einen Maßstab in CLAUDE.md oder .claude/skills, fragt sonst einmal nach einem Referenzdialog; ohne Maßstab Stände Bestand · plus, alle Punkte als K.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Prüf mal die Optik meiner neuen Landingpage",
+      "expected_output": "Skill greift nicht oder lehnt ab: Landingpages sind ausgeschlossen, Verweis auf Art-Direction-Skills.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Ist der graue Hinweistext #999 auf Weiß lesbar genug?",
+      "expected_output": "Misst mit scripts/kontrast.py: 2.85:1, Befund für Text (4.5:1) und große Schrift (3:1). Zahl statt Adjektiv.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "apfel profil",
+      "expected_output": "Geht direkt nach §6: listet die eigenen Profile aus ~/Documents/Apfel/profile/ und .apfel/profil.md mit Name, Gilt wenn und Stand (vorlage.md und beispiel.md nicht als Profil), fragt dann mit vier Möglichkeiten: Ansehen, Neu anlegen, Prüfen und verbessern, Tauschen.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Ich hab hier das Profil von unserem Team, nimm das: C:\\Users\\x\\Downloads\\crm.md",
+      "expected_output": "Übernehmen: prüft zuerst den Aufbau mit <skill>/scripts/profil_pruefen.py (unter Windows py oder python), zeigt Steckbrief und Grenzen ganz, legt erst nach einem Ja in ~/Documents/Apfel/profile/. Ändert sonst nichts.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "apfel kurz: der Auftragsdialog auf Zweig feature/auftrag",
+      "expected_output": "Prüft wie üblich, nur die vom Zweig geänderte Oberfläche (git diff --name-only gegen die Basis, Basis im Kopf). Bericht nur Kopf und drei Vorschläge, Haus 1:1 vor plus, Bremse vor Motor vor Fahrwerk, je mit Fundstelle. Bietet den vollen Bericht an.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Prüf mein Profil kundenkartei.md, ob die Fundstellen noch stimmen",
+      "expected_output": "Ermittelt den Ref des Maßstabs nach der Regel im Profil, ruft <skill>/scripts/profil_pruefen.py ~/Documents/Apfel/profile/kundenkartei.md --repo <klon> --ref <ref>, nennt fehlende Fundstellen mit Vorschlag für den neuen Ort und schreibt erst nach einem Ja.",
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "apfel: das Auftragsformular in der Kundenkartei auf meinem Zweig, voller Bericht und auch als Seite",
+      "expected_output": "Prüft nur die geänderte Oberfläche, voller Bericht mit Kontaktabzug je Station. Fragt nicht noch einmal nach der Seite, baut apfel-bericht-<dialog>-<datum>.html aus assets/bericht-vorlage.html und öffnet sie.",
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "apfel zeichnung: das Auftragsformular in der Kundenkartei auf Zweig feature/auftrag",
+      "expected_output": "Prüft wie üblich, Bericht im Terminal, danach ohne Rückfrage die Befundzeichnung aus assets/zeichnung-vorlage.html: Block WERKZEUG unverändert, nur Grau, Kästchen mit den Nummern aus dem Bericht in der Draufsicht, Explosionsansicht oder Schnitt nur, wenn Ebenen oder ein Weg zählen, keine erfundenen Maße. Legt apfel-zeichnung-<dialog>-<datum>.html im Apfel-Ordner ab und öffnet sie.",
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "apfel zeichnung ~/projekte/werkstatt (Ordner ohne Git, eine HTML-Seite)",
+      "expected_output": "Prüft nur Code, nennt im Kopf statt Commit das Dateidatum und dass es kein Git gibt; ohne Profil Stände neu · plus, alle Punkte K; fragt einmal nach einem Referenzdialog. Startet keine Skripte des Projekts.",
+      "files": []
+    }
+  ]
+}

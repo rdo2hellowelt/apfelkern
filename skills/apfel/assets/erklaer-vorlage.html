@@ -1,0 +1,505 @@
+<!-- Vorlage für scripts/erklaeren.py. Platzhalter {{…}} füllt das Skript; feste Texte hier pflegen. -->
+<title>Apfel, Blatt für Blatt</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: ein technisches Blatt. Schriftfeld oben, dann nummerierte Ansichten wie auf einer Zeichnung; Rotstift nur für Vorschläge. */
+:root{
+  --paper:#f3f4f2; --sheet:#fbfbfa; --ink:#1d1f1e; --ink-2:#4d524f; --line:#9aa09c; --hair:#d3d7d3; --fill:#e6e8e5;
+  --red:#b8321f; --red-soft:#f4dcd6;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#151716; --sheet:#1b1e1c; --ink:#e7eae6; --ink-2:#a9afab; --line:#6f7672; --hair:#343937; --fill:#262a28;
+  --red:#ff7a63; --red-soft:#3a201b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#151716; --sheet:#1b1e1c; --ink:#e7eae6; --ink-2:#a9afab; --line:#6f7672; --hair:#343937; --fill:#262a28;
+  --red:#ff7a63; --red-soft:#3a201b; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 48px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+a{color:inherit;text-decoration-color:var(--line);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.cap{font-family:var(--f-display);font-stretch:85%;text-transform:uppercase;letter-spacing:.08em;font-size:.72rem;font-weight:500;color:var(--ink-2)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;font-weight:600}
+h2{font-stretch:80%;text-transform:uppercase;letter-spacing:.06em;font-size:1.35rem}
+h3{font-size:1.02rem;font-stretch:90%;letter-spacing:.02em}
+p{margin:0;max-width:66ch}
+
+/* Schriftfeld */
+.tb{background:var(--sheet);border:1.5px solid var(--ink);border-radius:14px;display:grid;grid-template-columns:2.2fr repeat(3,1fr);overflow:hidden}
+.tb>div{padding:14px 16px;border-left:1px solid var(--ink);min-width:0}
+.tb>div:first-child{border-left:0;grid-row:span 2}
+.tb .r2{border-top:1px solid var(--ink)}
+.tb h1{font-size:clamp(2.6rem,7vw,4.6rem);font-stretch:118%;font-weight:500;letter-spacing:.12em;line-height:1;margin:8px 0 12px}
+.tb .v{font-family:var(--f-mono);font-size:.9rem;margin-top:4px}
+.tb .lead{font-size:.95rem;color:var(--ink-2)}
+@media (max-width:760px){.tb{grid-template-columns:1fr 1fr}.tb>div:first-child{grid-column:1/-1;grid-row:auto}.tb>div{border-top:1px solid var(--ink)}.tb>div:nth-child(2n){border-left:0}.tb>div:first-child{border-top:0}}
+
+/* Ansichten */
+.view{background:var(--sheet);border:1px solid var(--hair);border-radius:4px;padding:28px clamp(16px,3vw,36px);display:flex;flex-direction:column;gap:20px}
+.vh{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--ink);padding-bottom:10px}
+.vh .tag{font-family:var(--f-mono);font-size:.8rem;border:1px solid var(--ink);padding:1px 7px}
+.vh .sub{margin-left:auto}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.grid2>*,.grid3>*{min-width:0}
+
+/* Ablauf */
+.flow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;align-items:stretch}
+.st{position:relative;border:1.5px solid var(--ink);background:var(--sheet);padding:12px 12px 14px;margin-right:22px;display:flex;flex-direction:column;gap:6px}
+.st:last-child{margin-right:0}
+.st:not(:last-child)::after{content:"";position:absolute;right:-23px;top:50%;width:22px;border-top:1.5px solid var(--ink)}
+.st:not(:last-child)::before{content:"";position:absolute;right:-24px;top:calc(50% - 4.5px);border:4.5px solid transparent;border-left:7px solid var(--ink);border-right:0}
+.st .n{font-family:var(--f-mono);font-size:.75rem;color:var(--ink-2)}
+.st b{font-family:var(--f-display);font-stretch:88%;font-size:1rem;line-height:1.2}
+.st small{font-size:.8rem;color:var(--ink-2);line-height:1.4}
+.st.dash{border-style:dashed}
+.st.red{border-color:var(--red)}
+@media (max-width:980px){.flow{grid-template-columns:1fr}.st{margin-right:0;margin-bottom:22px}.st:last-child{margin-bottom:0}
+  .st:not(:last-child)::after{right:auto;left:28px;top:auto;bottom:-23px;width:0;height:22px;border-top:0;border-left:1.5px solid var(--ink)}
+  .st:not(:last-child)::before{right:auto;left:23.5px;top:auto;bottom:-24px;border:4.5px solid transparent;border-top:7px solid var(--ink);border-bottom:0}}
+
+.cmds{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.cmd{border:1px solid var(--hair);padding:12px 14px;display:flex;flex-direction:column;gap:4px;background:var(--paper)}
+.cmd code{font-family:var(--f-mono);font-size:.92rem;font-weight:500}
+.cmd span{font-size:.88rem;color:var(--ink-2)}
+
+/* Bausteine */
+.part{border:1.5px solid var(--ink);padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.part.slot{border-style:dashed}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:.9rem}
+dl.kv dt{font-family:var(--f-mono);font-size:.8rem;color:var(--ink-2);padding-top:2px}
+dl.kv dd{margin:0}
+
+/* Stände */
+.stands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1.5px solid var(--ink)}
+.stands>div{padding:16px;border-left:1px solid var(--ink);display:flex;flex-direction:column;gap:8px}
+.stands>div:first-child{border-left:0;background:repeating-linear-gradient(135deg,transparent 0 6px,var(--hair) 6px 7px)}
+.stands>div:last-child{outline:1.5px dashed var(--red);outline-offset:-7px}
+.stands h3{font-size:1.25rem}
+@media (max-width:700px){.stands{grid-template-columns:1fr}.stands>div{border-left:0;border-top:1px solid var(--ink)}.stands>div:first-child{border-top:0}}
+ol.rules{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0;counter-reset:r}
+ol.rules li{display:grid;grid-template-columns:38px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--hair);font-size:.93rem}
+ol.rules li::before{counter-increment:r;content:counter(r);font-family:var(--f-mono);border:1px solid var(--ink);width:26px;height:26px;display:grid;place-items:center;font-size:.8rem}
+ol.rules b{font-weight:600}
+.to{font-family:var(--f-mono);font-size:.78rem;padding:1px 6px;border:1px solid var(--line);margin-left:6px;white-space:nowrap}
+.to.p{border-color:var(--red);color:var(--red)}
+
+/* Baugruppen */
+.groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:820px){.groups{grid-template-columns:1fr}}
+.grp{border:1.5px solid var(--ink);padding:16px;display:flex;flex-direction:column;gap:8px;cursor:pointer;background:var(--sheet);text-align:left;font:inherit;color:inherit}
+.grp[aria-pressed="true"]{background:var(--fill);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.grp .big{font-family:var(--f-display);font-stretch:118%;font-size:2.2rem;line-height:1;font-weight:500}
+.grp small{color:var(--ink-2);font-size:.86rem}
+.bar{display:flex;height:8px;border:1px solid var(--ink)}
+.bar i{display:block;height:100%}
+.bar .h{background:var(--ink)}
+.bar .k{background:repeating-linear-gradient(135deg,transparent 0 3px,var(--line) 3px 4px)}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{font-family:var(--f-mono);font-size:.8rem;border:1px solid var(--line);background:transparent;color:var(--ink);padding:4px 10px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.tbl{overflow-x:auto;border:1px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:640px}
+th,td{border-bottom:1px solid var(--hair);padding:7px 10px;text-align:left;vertical-align:top}
+th{font-family:var(--f-display);font-stretch:85%;text-transform:uppercase;letter-spacing:.06em;font-size:.72rem;font-weight:600;background:var(--fill);border-bottom:1px solid var(--ink)}
+td.c{font-family:var(--f-mono);font-size:.78rem;white-space:nowrap}
+td.src{font-family:var(--f-mono);font-size:.76rem;color:var(--ink-2)}
+.ak{display:inline-block;width:20px;height:20px;border:1px solid var(--ink);text-align:center;line-height:18px;font-family:var(--f-mono);font-size:.75rem}
+.ak.h{background:var(--ink);color:var(--sheet)}
+.count{font-family:var(--f-mono);font-size:.8rem;color:var(--ink-2);margin-left:auto}
+
+/* Aufwand */
+.eff{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.eff>div{border:1px solid var(--ink);padding:12px 14px;display:flex;gap:12px;align-items:baseline}
+.eff b{font-family:var(--f-display);font-stretch:118%;font-size:1.8rem;font-weight:500;line-height:1}
+.eff span{font-size:.88rem}
+
+/* Bericht */
+.report{border:1.5px solid var(--ink);display:flex;flex-direction:column}
+.report>.row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--ink)}
+.report>.row>div{padding:10px 12px;border-left:1px solid var(--hair);font-size:.86rem;min-width:0}
+.report>.row>div:first-child{border-left:0}
+.contact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px}
+.contact>div{border:1px solid var(--line);aspect-ratio:4/3;max-width:100%;padding:8px;display:flex;flex-direction:column;justify-content:space-between;font-size:.78rem;min-width:0}
+.contact>div:first-child{background:repeating-linear-gradient(135deg,transparent 0 6px,var(--hair) 6px 7px)}
+.contact>div:last-child{border:1.5px dashed var(--red);color:var(--red)}
+.report .foot{padding:10px 12px;border-top:1px solid var(--ink);font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2);overflow-x:auto;white-space:nowrap}
+@media (max-width:600px){.report>.row{grid-template-columns:1fr 1fr}.report>.row>div:nth-child(3){border-left:0}}
+.order{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--f-mono);font-size:.84rem}
+.order span{border:1px solid var(--ink);padding:3px 9px}
+.order i{font-style:normal;color:var(--ink-2)}
+
+/* Zeichnung */
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px 18px}
+.legend>div{display:flex;gap:12px;align-items:center;font-size:.88rem}
+.legend svg{flex:none}
+figure{margin:0;display:flex;flex-direction:column;gap:8px}
+figure .img{border:1px solid var(--ink);background:#fff;overflow:auto;max-height:640px}
+figure img{display:block;width:100%;min-width:760px;max-width:none}
+figcaption{font-size:.84rem;color:var(--ink-2)}
+
+/* Regeln, Dateien, Läufe */
+ul.plain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+ul.plain li{padding:9px 0;border-top:1px solid var(--hair);font-size:.92rem}
+ul.plain li b{font-family:var(--f-display);font-stretch:90%;font-weight:600;display:block}
+.tree{font-family:var(--f-mono);font-size:.8rem;line-height:1.7;white-space:pre;overflow-x:auto;border:1px solid var(--hair);padding:14px;background:var(--paper)}
+.tree em{font-style:normal;color:var(--ink-2)}
+.runs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.run{border:1.5px solid var(--ink);padding:14px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.run h3{grid-column:1/-1}
+.run p{grid-column:1/-1;font-size:.86rem;color:var(--ink-2)}
+.run div{display:flex;flex-direction:column}
+.run b{font-family:var(--f-display);font-stretch:110%;font-size:1.4rem;font-weight:500;font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));border:1px solid var(--ink)}
+.kpis>div{padding:8px 12px;border-left:1px solid var(--hair)}
+.kpis>div:first-child{border-left:0}
+.kpis b{display:block;font-family:var(--f-display);font-stretch:110%;font-size:1.5rem;font-weight:500}
+.kpis .p b{color:var(--red)}
+.foot-line{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:var(--f-mono);font-size:.75rem;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+@media (prefers-reduced-motion:no-preference){.grp,.chip{transition:background .15s,color .15s}}
+
+/* Schnitt-Diagramm */
+.dia{overflow-x:auto;border:1px solid var(--hair);background:var(--paper)}
+.dia svg{display:block;min-width:900px;width:100%;height:auto}
+.dia text{font-family:var(--f-mono);font-size:12px;fill:var(--ink)}
+.dia .t2{fill:var(--ink-2);font-size:11px}
+.dia .tb{font-family:var(--f-display);font-size:14px;font-weight:600;letter-spacing:.04em}
+.dia .hand{font-family:var(--f-mono);fill:var(--red);font-size:12px;letter-spacing:.06em}
+.dia .box{fill:var(--sheet);stroke:var(--ink);stroke-width:1.5}
+.dia .slot{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:6 4}
+.dia .hat{fill:url(#hat2);stroke:var(--ink);stroke-width:1.2}
+.dia .ln{fill:none;stroke:var(--ink);stroke-width:1.4}
+.dia .wr{fill:none;stroke:var(--red);stroke-width:1.6;stroke-dasharray:12 4 2 4}
+.dia .ah{fill:var(--ink)}
+.dia .ahr{fill:var(--red)}
+.dia .hl{stroke:var(--line);stroke-width:1.1}
+.dia .gr{fill:var(--fill);stroke:var(--ink);stroke-width:1.2}
+</style>
+
+<div class="wrap">
+
+<header class="tb" aria-label="Schriftfeld">
+  <div>
+    <div class="cap">Apfel · Erklärblatt</div>
+    <h1>APFEL</h1>
+    <p class="lead">Ein Claude-Code-Skill, der Arbeitsdialoge im Browser prüft: Masken, Tabellen, Formulare, Speichern. Maßstab sind das Profil des Projekts und Apples Human Interface Guidelines, live geladen. Er liest nur und ändert nichts.</p>
+  </div>
+  <div><div class="cap">Zeichnung Nr.</div><div class="v">APFEL-ERKL-01</div></div>
+  <div><div class="cap">Stand</div><div class="v">{{STAND}}</div></div>
+  <div><div class="cap">Blatt</div><div class="v">1 von 1</div></div>
+  <div class="r2"><div class="cap">Quelle</div><div class="v">SKILL.md · {{ZEILEN}} Zeilen</div></div>
+  <div class="r2"><div class="cap">Prüfpunkte</div><div class="v">{{N_PP}} in 3 Baugruppen</div></div>
+  <div class="r2"><div class="cap">Nächste Pflege</div><div class="v">{{PFLEGE}}</div></div>
+</header>
+
+<section class="view" aria-labelledby="v1">
+  <div class="vh"><span class="tag">A</span><h2 id="v1">Ablauf</h2><span class="cap sub">vom Aufruf bis zum Blatt</span></div>
+  <p>Wer <span class="mono">apfel</span> tippt, bekommt eine Begrüßung und ein Menü. Wer gleich einen Gegenstand nennt („prüf den Auftragsdialog auf Zweig X“), landet direkt bei Schritt 1. Danach läuft jeder Review dieselbe Strecke.</p>
+  <div class="flow">
+    <div class="st dash"><span class="n">§0</span><b>Start</b><small>Begrüßung, dann: bekanntes Projekt, eigenes Projekt, Profile oder „Auf gut Glück“</small></div>
+    <div class="st"><span class="n">§1</span><b>Gegenstand</b><small>Dialog, Zweig, Commit. Bei einem Zweig nur die Dateien aus <span class="mono">git diff</span></small></div>
+    <div class="st"><span class="n">§1 · §6</span><b>Profil wählen</b><small>Projektprofil, sonst genannter Maßstab, sonst keiner</small></div>
+    <div class="st"><span class="n">§2</span><b>Drei Stände</b><small>Bestand · Haus 1:1 · plus, sortiert nach {{N_REGELN}} Regeln</small></div>
+    <div class="st"><span class="n">§3</span><b>{{N_PP}} Prüfpunkte</b><small>Motor, Fahrwerk, Bremse; je Punkt Art H/K und Code/Lauf</small></div>
+    <div class="st red"><span class="n">§4</span><b>Kür</b><small>Vorschläge über den Maßstab hinaus, Aufwand S, M oder L</small></div>
+    <div class="st"><span class="n">§5</span><b>Bericht</b><small>Terminal, auf Wunsch Seite zum Lesen und/oder Befundzeichnung</small></div>
+  </div>
+  <div class="cmds">
+    <div class="cmd"><code>apfel</code><span>Begrüßung und Menü mit vier Wegen</span></div>
+    <div class="cmd"><code>apfel kurz &lt;dialog&gt;</code><span>Volle Prüfung, berichtet nur Urteil, Zahlen und die drei wichtigsten Punkte</span></div>
+    <div class="cmd"><code>apfel zeichnung &lt;dialog&gt;</code><span>Volle Prüfung, danach gleich die Befundzeichnung</span></div>
+    <div class="cmd"><code>apfel profil</code><span>Profile ansehen, anlegen, prüfen, verbessern, tauschen</span></div>
+  </div>
+</section>
+
+<section class="view" aria-labelledby="v1b">
+  <div class="vh"><span class="tag">A–A</span><h2 id="v1b">Schnitt durch einen Lauf</h2><span class="cap sub">was gelesen wird, was geschrieben wird</span></div>
+  <p>Ein Lauf liest aus drei Quellen: dem Repo über <span class="mono">git show</span>, Apples Seiten über <span class="mono">curl</span> und den lokalen Skripten. Geschrieben wird nur an zwei Orte (Strich-Punkt): in den Apfel-Ordner unter Dokumente und, nach einem Ja, in den Profilordner. Schraffiert ist, was nie passiert.</p>
+  <div class="dia" role="img" aria-label="Schnitt: Terminal ruft den Skill, der Skill liest Repo, Apple-Seiten und Skripte und schreibt nur Bericht, Seite und Zeichnung in den Ergebnisordner sowie Profile nach einem Ja.">
+  <svg viewBox="0 0 980 500" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="hat2" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" fill="var(--sheet)"/><line x1="0" y1="0" x2="0" y2="7" stroke="var(--line)" stroke-width="1.2"/></pattern>
+      <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" class="ah"/></marker>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" class="ahr"/></marker>
+    </defs>
+    <!-- Maßlinie oben -->
+    <line x1="20" y1="22" x2="960" y2="22" class="hl"/><text x="490" y="16" text-anchor="middle" class="t2">{{LAUF_SCHNITT}}</text>
+
+    <!-- Terminal -->
+    <rect x="20" y="170" width="170" height="96" rx="8" class="box"/>
+    <text x="34" y="194" class="tb">TERMINAL</text>
+    <rect x="34" y="208" width="142" height="26" rx="4" class="gr"/>
+    <text x="42" y="225">apfel kurz …</text>
+    <text x="34" y="254" class="t2">Sitzung im Repo</text>
+    <line x1="190" y1="218" x2="256" y2="218" class="ln" marker-end="url(#a)"/>
+    <text x="196" y="210" class="t2">Skill</text>
+
+    <!-- Skill -->
+    <rect x="260" y="44" width="380" height="330" rx="12" class="box"/>
+    <text x="278" y="70" class="tb">&lt;skill&gt; + ~/Documents/Apfel/profile</text>
+    <rect x="278" y="84" width="344" height="40" class="gr"/>
+    <text x="292" y="109">SKILL.md · §0 Start bis §7 Erklärblatt</text>
+    <rect x="278" y="138" width="160" height="70" class="slot"/>
+    <text x="292" y="162" class="tb">PROFIL</text>
+    <text x="292" y="182" class="t2">{{PROFIL_DATEI}} · Maßstab</text>
+    <text x="292" y="198" class="t2">{{PROFIL_FUND}}</text>
+    <rect x="462" y="138" width="160" height="70" class="gr"/>
+    <text x="476" y="162" class="tb">PRÜFPUNKTE</text>
+    <text x="476" y="182" class="t2">Motor {{N_MOTOR}} · Fahrwerk {{N_FAHRWERK}}</text>
+    <text x="476" y="198" class="t2">Bremse {{N_BREMSE}}</text>
+    <rect x="278" y="222" width="344" height="40" class="gr"/>
+    <text x="292" y="247">Rangfolge · {{N_REGELN}} Regeln → Bestand · 1:1 · plus</text>
+    <rect x="278" y="276" width="344" height="80" class="box"/>
+    <text x="292" y="300" class="tb">BERICHT §5</text>
+    <text x="292" y="320" class="t2">Kopf · Kontaktabzug je Station</text>
+    <text x="292" y="338" class="t2">Nr · Baugruppe · Aufwand · Fundstelle · HIG</text>
+
+    <!-- Quellen rechts -->
+    <rect x="740" y="44" width="220" height="74" rx="6" class="box"/>
+    <text x="756" y="68" class="tb">REPO</text>
+    <text x="756" y="88" class="t2">Zweig des Auftrags + Ref</text>
+    <text x="756" y="104" class="t2">des Maßstabs</text>
+    <line x1="740" y1="81" x2="644" y2="104" class="ln" marker-end="url(#a)"/>
+    <text x="650" y="80" class="t2">git -C … show</text>
+
+    <rect x="740" y="142" width="220" height="74" rx="6" class="box"/>
+    <text x="756" y="166" class="tb">DEVELOPER.APPLE.COM</text>
+    <text x="756" y="186" class="t2">HIG-Seite als .md, live</text>
+    <text x="756" y="202" class="t2">nie abgelegt</text>
+    <line x1="740" y1="179" x2="626" y2="175" class="ln" marker-end="url(#a)"/>
+    <text x="650" y="168" class="t2">curl | grep</text>
+
+    <rect x="740" y="240" width="220" height="74" rx="6" class="box"/>
+    <text x="756" y="264" class="tb">SCRIPTS/</text>
+    <text x="756" y="284" class="t2">kontrast · profil_pruefen</text>
+    <text x="756" y="300" class="t2">zufall_hig · nur stdlib</text>
+    <line x1="740" y1="277" x2="626" y2="246" class="ln" marker-end="url(#a)"/>
+    <text x="664" y="278" class="t2">python3</text>
+
+    <rect x="740" y="336" width="220" height="80" class="hat"/>
+    <rect x="756" y="346" width="188" height="60" class="box" style="stroke-width:1"/>
+    <text x="850" y="366" text-anchor="middle" class="tb">NIE</text>
+    <text x="850" y="383" text-anchor="middle" class="t2">auschecken · installieren</text>
+    <text x="850" y="398" text-anchor="middle" class="t2">committen im Repo</text>
+
+    <!-- Schreiben -->
+    <path d="M330 356 V420" class="wr" marker-end="url(#ar)"/>
+    <path d="M450 356 V420" class="wr" marker-end="url(#ar)"/>
+    <path d="M570 356 V420" class="wr" marker-end="url(#ar)"/>
+    <rect x="270" y="424" width="120" height="44" class="gr"/><text x="330" y="451" text-anchor="middle">Terminal · MD</text>
+    <rect x="390" y="424" width="120" height="44" class="slot"/><text x="450" y="451" text-anchor="middle">Seite</text>
+    <rect x="510" y="424" width="120" height="44" class="slot"/><text x="570" y="451" text-anchor="middle">Zeichnung</text>
+    <line x1="390" y1="482" x2="630" y2="482" class="hl"/><text x="510" y="496" text-anchor="middle" class="t2">~/Documents/Apfel/</text>
+
+    <path d="M278 173 C 210 173 200 330 200 400 L200 430" class="wr" marker-end="url(#ar)"/>
+    <rect x="140" y="434" width="120" height="44" class="slot"/><text x="200" y="461" text-anchor="middle">profile/</text>
+
+    <!-- Rotstift -->
+    <text x="40" y="414" class="hand">NUR NACH EINEM JA</text>
+    <text x="646" y="451" class="hand">SCHREIBT NUR HIER HIN</text>
+    <text x="20" y="150" class="hand">LIEST NUR</text>
+    <text x="20" y="300" class="hand">ÄNDERT NICHTS</text>
+  </svg>
+  </div>
+</section>
+
+<section class="view" aria-labelledby="v2">
+  <div class="vh"><span class="tag">B</span><h2 id="v2">Zwei Bausteine</h2><span class="cap sub">gleich für alle · je Projekt</span></div>
+  <div class="grid2">
+    <div class="part">
+      <span class="cap">Fest im Skill</span>
+      <h3>Prüfpunkte</h3>
+      <p>{{N_PP}} Fragen an jeden Dialog, gleich für jedes Projekt. Jede Frage nennt ihre Quelle: eine Stelle im Hausmaßstab (<span class="mono">Haus:Thema</span>), eine Apple-Seite (<span class="mono">HIG:seite</span>) oder eine der zwei Regelsammlungen in <span class="mono">references/</span>.</p>
+      <dl class="kv">
+        <dt>HIG</dt><dd>je Seite live mit <span class="mono">curl</span> von developer.apple.com, gezielt mit <span class="mono">grep</span>, nie abgelegt</dd>
+        <dt>Arbeitsmasken</dt><dd>Tabellen, Formulare, Zustände (nach taste-skill, MIT)</dd>
+        <dt>Bewegung</dt><dd>Rückmeldung und Animation (nach Emil Kowalski, MIT)</dd>
+      </dl>
+    </div>
+    <div class="part slot">
+      <span class="cap">Eine Markdown-Datei je Projekt</span>
+      <h3>Profil</h3>
+      <p>Sagt, woran sich ein Projekt misst. Oben ein Steckbrief, darunter Codebasen, Grenzen und 15 Grundthemen mit je einer Fundstelle im Vorbild-Dialog. Vorhanden: {{PROFILE_LISTE}}.</p>
+      <dl class="kv">
+        <dt>Gilt, wenn</dt><dd>woran Apfel das Repo erkennt</dd>
+        <dt>Stände</dt><dd>z. B. Alt · Neu 1:1 · Neu plus</dd>
+        <dt>Hausmaßstab</dt><dd>Vorbild-Dialog oder Design-System</dd>
+        <dt>Ref</dt><dd>gegen welchen Zweig gemessen wird</dd>
+        <dt>Stand</dt><dd>wann alle Fundstellen zuletzt geprüft wurden</dd>
+      </dl>
+      <p class="cap">Fundorte: 1. <span class="mono">.apfel/profil.md</span> im Repo · 2. <span class="mono">profile/&lt;projekt&gt;.md</span></p>
+    </div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Lage</th><th>Hausmaßstab</th><th>Stände heißen</th></tr></thead>
+    <tbody>
+      <tr><td>Ein Profil passt zum Repo</td><td>wie im Profil, mit dessen Regeln zu Refs und Grenzen</td><td>wie im Feld „Stände“</td></tr>
+      <tr><td>Kein Profil, aber ein Maßstab ist genannt (CLAUDE.md, Hausstil, Auftrag)</td><td>dieser Maßstab, mit Pfad und Commit</td><td>Bestand · Haus 1:1 · plus</td></tr>
+      <tr><td>Nichts davon</td><td>keiner. Alle H-Punkte werden K, die Spalte Haus 1:1 entfällt</td><td>Bestand · plus</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="view" aria-labelledby="v3">
+  <div class="vh"><span class="tag">C</span><h2 id="v3">Drei Stände</h2><span class="cap sub">die Spalten jedes Berichts</span></div>
+  <div class="stands">
+    <div><span class="cap">schraffiert · alt</span><h3>Bestand</h3><p>Der alte Dialog, den der neue ersetzt. Gibt es keinen, steht hier „neu“.</p></div>
+    <div><span class="cap">volle Linie · Pflicht</span><h3>Haus 1:1</h3><p>Dieselbe Funktion im Bild des Hausmaßstabs, ohne Zusätze. Abweichungen hier sind Befunde.</p></div>
+    <div><span class="cap" style="color:var(--red)">Strich-Punkt · Kür</span><h3>plus</h3><p>Haus 1:1 und dazu Vorschläge, die darüber hinausgehen. Entschieden wird im Team.</p></div>
+  </div>
+  <div>
+    <h3 style="margin-bottom:6px">Rangfolge: wohin ein Befund gehört</h3>
+    <p class="cap" style="margin-bottom:6px">von oben nach unten, die erste passende Regel gilt</p>
+    <ol class="rules">{{RANGFOLGE}}</ol>
+  </div>
+</section>
+
+<section class="view" aria-labelledby="v4">
+  <div class="vh"><span class="tag">D</span><h2 id="v4">Drei Baugruppen</h2><span class="cap sub">Tempo · Halt · Sicherheit</span></div>
+  <p>Die Prüfpunkte sind wie ein Fahrzeug gegliedert. <b>H</b> heißt: der Hausmaßstab hat dafür ein Muster, eine Abweichung ist ein Befund. <b>K</b> heißt: nur Kür. <b>Code</b> ist im Quelltext prüfbar, <b>Lauf</b> nur am laufenden Dialog. Ohne Aufnahmen landen Lauf-Punkte unter „Offen für den Klickweg“. Auf eine Baugruppe tippen, um die Tabelle zu filtern.</p>
+  <div class="groups" id="groups"></div>
+  <div class="filters" role="group" aria-label="Filter">
+    <span class="cap">Art</span>
+    <button class="chip" data-f="art" data-v="H" aria-pressed="false">H · Haus</button>
+    <button class="chip" data-f="art" data-v="K" aria-pressed="false">K · Kür</button>
+    <span class="cap" style="margin-left:10px">Prüfbar</span>
+    <button class="chip" data-f="pb" data-v="Code" aria-pressed="false">Code</button>
+    <button class="chip" data-f="pb" data-v="Lauf" aria-pressed="false">Lauf</button>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th style="width:90px">Baugruppe</th><th>Prüfpunkt</th><th style="width:44px">Art</th><th style="width:100px">Prüfbar</th><th style="width:230px">Quelle</th></tr></thead>
+    <tbody id="pp"></tbody>
+  </table></div>
+  <div>
+    <h3 style="margin-bottom:8px">Aufwand der Vorschläge</h3>
+    <div class="eff">
+      <div><b>S</b><span>bis zwei Stunden an einer Stelle. Meist „tief hängend“.</span></div>
+      <div><b>M</b><span>ein Tag oder mehrere Stellen</span></div>
+      <div><b>L</b><span>mehrere Tage oder ein gemeinsamer Baustein</span></div>
+      <div><b style="font-size:1.1rem;font-stretch:90%">Entsch.</b><span>erst eine Entscheidung im Team, dann S, M oder L</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" aria-labelledby="v5">
+  <div class="vh"><span class="tag">E</span><h2 id="v5">Bericht als Kontaktabzug</h2><span class="cap sub">je Station die Stände nebeneinander</span></div>
+  <div class="grid2">
+    <div class="report" aria-label="Aufbau eines Berichts, schematisch">
+      <div class="row">
+        <div><span class="cap">Dialog und Stand</span><br>Zweig, Commit, Maßstab</div>
+        <div><span class="cap">Material</span><br>Code, Aufnahmen, Klickweg</div>
+        <div><span class="cap">Urteil</span><br>ein Satz</div>
+        <div><span class="cap">Zahlen</span><br>je Baugruppe, 1:1 und plus</div>
+      </div>
+      <div class="contact">
+        <div><span class="cap">Bestand</span><span>Bild oder 2–4 Zeilen</span></div>
+        <div><span class="cap">Haus 1:1</span><span>Bild oder 2–4 Zeilen</span></div>
+        <div><span class="cap" style="color:inherit">plus · Bremse</span><span>Skizze, solange nicht gebaut</span></div>
+      </div>
+      <div class="foot">Nr · Baugruppe · Bestand · Haus 1:1 · plus · Aufwand · Fundstelle Code · HIG-Seite</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <p><b>Stationen</b> sind die Schritte des Klickwegs. Ohne Klickweg ist jede Seite je Modus (Lesen, Bearbeiten) eine Station, dazu jeder Unterdialog mit eigenen Eingaben.</p>
+      <p><b>Fundstelle</b> immer mit vollem Pfad und Zeile, nur wenn selbst gesehen. Darunter: „Offen für den Klickweg“ und höchstens drei Zeilen „Was trägt“.</p>
+      <div>
+        <p class="cap" style="margin-bottom:6px">Reihenfolge in der Kurzfassung: verlorene Arbeit zuerst</p>
+        <div class="order"><span>Haus 1:1</span><i>vor</i><span>plus</span><i>·</i><span>Bremse</span><i>vor</i><span>Motor</span><i>vor</i><span>Fahrwerk</span></div>
+      </div>
+      <p><b>Ausgabe</b> immer im Terminal als Markdown. Danach fragt Apfel, ob der Bericht zusätzlich als Seite zum Lesen, als Befundzeichnung oder als beides kommen soll, und öffnet die Datei.</p>
+    </div>
+  </div>
+</section>
+
+<section class="view" aria-labelledby="v6">
+  <div class="vh"><span class="tag">F</span><h2 id="v6">Befundzeichnung</h2><span class="cap sub">ein Blatt, 1700 × 1060, nur Grau</span></div>
+  <p>Ein Blatt im Stil der Maßzeichnungen, die Apple für Zubehör veröffentlicht. Es zeigt, wo die Vorschläge im Dialog sitzen und welchen Weg sie nehmen: Draufsicht immer, Explosionsansicht wenn Ebenen zählen, Schnitt wenn ein Weg zählt (Speichern, Prüfung, Rechte). Maße nur, wenn sie im Code stehen. Die Striche tragen die Bedeutung:</p>
+  <div class="legend">
+    <div><svg width="64" height="14" aria-hidden="true"><line x1="2" y1="7" x2="62" y2="7" stroke="var(--ink)" stroke-width="2"/></svg>Stand im Zweig</div>
+    <div><svg width="64" height="14" aria-hidden="true"><line x1="2" y1="7" x2="62" y2="7" stroke="var(--red)" stroke-width="2" stroke-dasharray="12 4 2 4"/></svg>Vorschlag (Strich-Punkt)</div>
+    <div><svg width="64" height="14" aria-hidden="true"><line x1="2" y1="7" x2="62" y2="7" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 4"/></svg>Platzhalter</div>
+    <div><svg width="64" height="20" aria-hidden="true"><defs><pattern id="hat" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--line)" stroke-width="1.2"/></pattern></defs><rect x="2" y="2" width="60" height="16" fill="url(#hat)" stroke="var(--ink)"/></svg>gesperrt, fehlt, überschrieben</div>
+    <div><svg width="64" height="20" aria-hidden="true"><rect x="2" y="2" width="60" height="16" rx="3" fill="var(--fill)" stroke="var(--ink)"/></svg>Knopf oder Feld</div>
+    <div><svg width="64" height="20" aria-hidden="true"><rect x="22" y="2" width="16" height="16" fill="var(--sheet)" stroke="var(--ink)"/><text x="30" y="14.5" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="var(--ink)">3</text></svg>Nummer wie im Bericht</div>
+  </div>
+  <p class="cap" style="color:var(--ink-2)">Rot steht nur auf diesem Erklärblatt. Die echte Zeichnung bleibt bewusst grau und hell.</p>
+  {{ZEICHNUNG}}
+</section>
+
+<section class="view" aria-labelledby="v7">
+  <div class="vh"><span class="tag">G</span><h2 id="v7">Regeln beim Prüfen</h2><span class="cap sub">warum man den Befunden trauen kann</span></div>
+  <div class="grid2">
+    <ul class="plain">
+      <li><b>Nur lesen.</b>Kein Auschecken, keine Installation, kein Commit. Code kommt über <span class="mono">git show &lt;ref&gt;:&lt;pfad&gt;</span>. Geschrieben wird nur in den Profilordner, und erst nach einem Ja.</li>
+      <li><b>Zahl statt Adjektiv.</b>„12 px #999 auf Weiß, 2.85:1“ statt „schlecht lesbar“, gemessen mit <span class="mono">kontrast.py</span>.</li>
+      <li><b>Zitieren oder als Urteil kennzeichnen.</b>Apple wird nur nach dem Laden der Seite zitiert, kurz und mit Link. WebFetch fasst nur zusammen und taugt deshalb nicht als Zitatquelle.</li>
+      <li><b>Apple übersetzen.</b>Die HIG sprechen von macOS und iOS. Eine Übersetzungstafel überträgt sie auf den Browser; Menüleiste und Fensterknöpfe entfallen.</li>
+    </ul>
+    <ul class="plain">
+      <li><b>Haus vor Kür, Kür vor Geschmack.</b>Was weder Maßstab noch Bestand noch eine Quelle trägt, kommt nicht in die Tabelle.</li>
+      <li><b>Nicht übertreiben.</b>Ein guter Dialog bekommt einen kurzen Bericht. Zwanzig Befunde sind kein Ziel.</li>
+      <li><b>Befehle passend zu den Freigaben.</b>Ein Git-Befehl pro Aufruf mit <span class="mono">-C &lt;pfad&gt;</span>, kein <span class="mono">cd</span>, keine Ketten. So laufen die lesenden Befehle aus <span class="mono">settings.json</span> ohne Rückfrage.</li>
+      <li><b>Nichts aus dem Netz ausführen.</b>Geladen werden nur HIG-Seiten als Text. Die Skripte sind lokal und nutzen nur die Standardbibliothek.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="view" aria-labelledby="v8">
+  <div class="vh"><span class="tag">H</span><h2 id="v8">Stückliste und Probeläufe</h2><span class="cap sub">Stand {{STAND}}</span></div>
+  <div class="grid2">
+<div class="tree">&lt;skill&gt;/                 <em>Git-Repo oder Plugin-Kopie</em>
+├─ SKILL.md            <em>§0 bis §7, Regeln, Pflege</em>
+├─ profile/            <em>{{PROFILE_KURZ}}</em>
+├─ references/         <em>hig-seiten, arbeitsmasken,
+│                         bewegung</em>
+├─ scripts/            <em>kontrast, profil_pruefen,
+│                         zufall_hig, erklaeren</em>
+├─ assets/             <em>bericht-, zeichnung- und
+│                         erklaer-vorlage.html</em>
+├─ evals/              <em>wann greift der Skill</em>
+└─ QUELLEN.md · LICENSE · LICENSES/
+
+~/Documents/Apfel/        <em>Apfel-Ordner, nicht im Repo</em>
+├─ apfel-bericht-*.html
+├─ apfel-zeichnung-*.html
+├─ apfel-erklaert-*.html
+├─ profile/            <em>eigene Profile, privat</em>
+└─ probelaeufe/</div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <div class="runs">{{LAEUFE}}</div>
+      <p style="font-size:.9rem">Die Freigaben stehen in <span class="mono">~/.claude/settings.json</span>: lesende Git-Befehle, <span class="mono">curl</span> auf Apples Seiten, die Skripte, Schreiben und Öffnen im Apfel-Ordner. Damit läuft ein Lauf fast ohne Rückfrage.</p>
+    </div>
+  </div>
+</section>
+
+<div class="foot-line"><span>{{HEUTE}} · Apfel · Erklärblatt</span><span>aus SKILL.md @ {{COMMIT}}</span></div>
+</div>
+
+<script>
+const P={{PRUEFPUNKTE_JSON}};
+const G={{GRUPPEN_JSON}};
+const st={g:null,art:null,pb:null};
+const gEl=document.getElementById("groups");
+Object.keys(G).forEach(g=>{const rows=P.filter(p=>p[0]===g),h=rows.filter(p=>p[2]==="H").length,k=rows.length-h;
+  const b=document.createElement("button");b.className="grp";b.setAttribute("aria-pressed","false");b.dataset.g=g;
+  b.innerHTML=`<span class="cap">${g}</span><span class="big">${rows.length}</span><small>${G[g]}</small><div class="bar" title="${h} H, ${k} K"><i class="h" style="width:${h/rows.length*100}%"></i><i class="k" style="width:${k/rows.length*100}%"></i></div><small class="mono">${h} × H · ${k} × K</small>`;
+  b.onclick=()=>{st.g=st.g===g?null:g;render()};gEl.appendChild(b)});
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{const f=c.dataset.f,v=c.dataset.v;st[f]=st[f]===v?null:v;render()});
+function render(){
+  document.querySelectorAll(".grp").forEach(b=>b.setAttribute("aria-pressed",String(st.g===b.dataset.g)));
+  document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(st[c.dataset.f]===c.dataset.v)));
+  const rows=P.filter(p=>(!st.g||p[0]===st.g)&&(!st.art||p[2]===st.art)&&(!st.pb||p[3].includes(st.pb)));
+  document.getElementById("pp").innerHTML=rows.map(p=>`<tr><td class="c">${p[0]}</td><td>${p[1]}</td><td><span class="ak ${p[2]==="H"?"h":""}">${p[2]}</span></td><td class="c">${p[3]}</td><td class="src">${p[4]}</td></tr>`).join("");
+  document.getElementById("count").textContent=`${rows.length} von ${P.length}`;
+}
+render();
+</script>

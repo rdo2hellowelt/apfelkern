@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apfel · {{DIALOG}}</title>
+<!--
+  Vorlage für den Apfel-Bericht. So füllt Claude sie:
+  1. Datei kopieren nach apfel-bericht-<dialog>-<JJJJ-MM-TT>.html im Apfel-Ordner.
+  2. Alle {{…}} ersetzen. Der Block zwischen STATION:anfang und STATION:ende wird je Station einmal gesetzt.
+     Der Block VORSCHLAG wird je Vorschlag einmal gesetzt.
+  3. Je Spalte der Station entweder ein Bild (Aufnahme oder Skizze) oder zwei bis vier Zeilen Beschreibung.
+     Für plus ohne Aufnahme: eine kleine SVG-Skizze, nur Rechtecke und Text, keine Verzierung. Lieber Text als
+     eine Skizze, die mehr verspricht als der Vorschlag.
+  4. Keine externen Dateien außer den Schriften und den Links zu Apple. Bilder relativ zum Bericht oder als data:-Adresse.
+     Das Werkbank-Zeichen oben bleibt, der Hintergrund bleibt hell.
+  5. Öffnen: Mac `open <datei>`, Windows `start <datei>`.
+  Bleibt ein Abschnitt leer, fällt er weg. Nicht übertreiben: Der Bericht ist zum Lesen, nicht zum Staunen.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Hell, Haarlinien, Raster 1:3, zwei Schriften. Bewusst nur ein helles Thema. */
+  :root {
+    --papier: #f3efe3; --blatt: #fcfbf6; --tinte: #34433f; --weich: #6b7b76; --fern: #9aa8a3;
+    --linie: #e2e6e1; --linie-stark: #aab7b1; --akzent: #0f766e; --akzent-schleier: #0f766e12; --gelb: #9a5b00;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--papier); color: var(--tinte);
+    font: 15px/1.58 "Archivo", "Helvetica Neue", Arial, sans-serif;
+    padding-block: clamp(20px, 4vw, 56px) 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .blatt { max-width: 1080px; margin: 0 auto; background: var(--blatt); padding: clamp(22px, 4vw, 52px); }
+  .mono, .marke-wort, th, .kopf dt, .stufe h3, .fuss, code { font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace; }
+  header { display: grid; grid-template-columns: 1fr 3fr; column-gap: 32px; align-items: end; }
+  .werkbank { grid-column: 1; grid-row: 1 / span 3; align-self: start; width: 72px; height: auto; }
+  .marke-wort { grid-column: 2; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--akzent); margin: 0 0 12px; }
+  h1 { grid-column: 2; font-weight: 600; font-size: clamp(26px, 3.6vw, 36px); line-height: 1.1; letter-spacing: -.01em; margin: 0 0 8px; text-wrap: balance; }
+  .urteil { grid-column: 2; font-size: 16.5px; color: var(--weich); margin: 0; max-width: 62ch; }
+  h2 { font-weight: 600; font-size: 19px; margin: 38px 0 12px; padding-top: 14px; border-top: 1px solid var(--linie-stark); }
+  .kopf { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 28px; margin: 26px 0 0;
+    padding: 14px 0; border-top: 1px solid var(--linie-stark); border-bottom: 1px solid var(--linie); }
+  .kopf div { min-width: 0; }
+  .kopf dt { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--weich); }
+  .kopf dd { margin: 5px 0 0; }
+  .stufen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--linie); border-bottom: 1px solid var(--linie); }
+  .stufe { padding: 14px 16px 16px; border-right: 1px solid var(--linie); min-width: 0; }
+  .stufe:first-child { padding-left: 0; }
+  .stufe:last-child { border-right: 0; background: var(--akzent-schleier); }
+  .stufe h3 { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--weich); margin: 0 0 10px; font-weight: 500;
+    display: flex; gap: 8px; align-items: center; }
+  .stufe h3::before { content: ""; width: 8px; height: 8px; background: var(--fern); flex: 0 0 8px; }
+  .stufe:nth-child(2) h3::before { background: var(--tinte); }
+  .stufe:last-child h3::before { background: var(--akzent); border-radius: 50%; }
+  .stufe img, .stufe svg { display: block; width: 100%; height: auto; max-width: 100%; border: 1px solid var(--linie); margin: 0 0 10px; background: #fff; }
+  .stufe p { margin: 0 0 6px; }
+  .tabelle { overflow-x: auto; margin: 16px 0 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--linie); }
+  th { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--weich); font-weight: 500; border-bottom-color: var(--linie-stark); }
+  td.nr { font-variant-numeric: tabular-nums; color: var(--weich); }
+  code { font-size: 12.5px; overflow-wrap: anywhere; color: var(--tinte); }
+  a { color: var(--akzent); text-underline-offset: 3px; }
+  .aufwand { font-weight: 600; }
+  ul.liste { margin: 8px 0 0; padding-left: 20px; }
+  ul.liste li { margin: 5px 0; }
+  .fuss { margin-top: 44px; padding-top: 12px; border-top: 1px solid var(--linie-stark); font-size: 11.5px; color: var(--weich); line-height: 1.7; }
+  @media (max-width: 700px) {
+    header { grid-template-columns: 1fr; } .werkbank { grid-row: auto; margin-bottom: 14px; }
+    .marke-wort, h1, .urteil { grid-column: 1; }
+    .stufen { grid-template-columns: 1fr; } .stufe, .stufe:first-child { padding: 14px 0; border-right: 0; border-bottom: 1px solid var(--linie); }
+  }
+  @media print {
+    body { background: #fff; padding: 0; font-size: 10.5pt; } .blatt { padding: 0; max-width: none; background: #fff; }
+    .tabelle { overflow: visible; } table { min-width: 0; } .station, tr { break-inside: avoid; }
+    .stufe:last-child, .werkbank, .stufe h3::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<main class="blatt">
+  <header>
+    <svg class="werkbank" viewBox="0 0 120 44" role="img" aria-label="Werkbank">
+      <rect x="2" y="30" width="116" height="6" fill="#34433f"/>
+      <rect x="10" y="36" width="6" height="6" fill="#34433f"/>
+      <rect x="104" y="36" width="6" height="6" fill="#34433f"/>
+      <circle cx="26" cy="18" r="10" fill="#0f766e"/>
+      <rect x="48" y="8" width="20" height="20" fill="#34433f"/>
+      <path d="M84 28 L94 8 L104 28 Z" fill="#9a5b00"/>
+    </svg>
+    <p class="marke-wort">● Apfel</p>
+    <h1>{{DIALOG}}</h1>
+    <p class="urteil">{{URTEIL_EIN_SATZ}}</p>
+  </header>
+  <dl class="kopf">
+    <div><dt>Stand</dt><dd>{{ZWEIG}} · <code>{{COMMIT}}</code> · {{DATUM}}</dd></div>
+    <div><dt>Hausmaßstab</dt><dd>{{VORBILD_ODER_KEINER}}</dd></div>
+    <div><dt>Material</dt><dd>{{CODE_AUFNAHMEN_KLICKWEG}}</dd></div>
+    <div><dt>Vorschläge</dt><dd>{{ZAHL}} · davon {{IN_1ZU1}} in 1:1, {{NUR_PLUS}} nur in plus</dd></div>
+  </dl>
+
+  <!-- STATION:anfang -->
+  <section class="station">
+    <h2>{{STATION}}</h2>
+    <div class="stufen">
+      <div class="stufe"><h3>Bestand</h3>{{BILD_ODER_ZEILEN_BESTAND}}</div>
+      <div class="stufe"><h3>1:1</h3>{{BILD_ODER_ZEILEN_1ZU1}}</div>
+      <div class="stufe"><h3>plus · {{BAUGRUPPEN}}</h3>{{BILD_SKIZZE_ODER_ZEILEN_PLUS}}</div>
+    </div>
+    <div class="tabelle">
+      <table>
+        <thead><tr><th>Nr</th><th>Baugruppe</th><th>Bestand</th><th>1:1</th><th>plus</th><th>Aufwand</th><th>Fundstelle Code</th><th>Apple</th></tr></thead>
+        <tbody>
+          <!-- VORSCHLAG -->
+          <tr><td class="nr">{{NR}}</td><td>{{BAUGRUPPE}}</td><td>{{BESTAND}}</td><td>{{HAUS_1ZU1}}</td><td>{{PLUS}}</td>
+            <td class="aufwand">{{S_M_L}}</td><td><code>{{PFAD:ZEILE}}</code></td>
+            <td><a href="https://developer.apple.com/design/human-interface-guidelines/{{HIG_SEITE}}">{{HIG_SEITE}}</a></td></tr>
+          <!-- /VORSCHLAG -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <!-- STATION:ende -->
+
+  <h2>Offen für den Klickweg</h2>
+  <ul class="liste"><li>{{STATION}}: {{WAS_AM_LAUFENDEN_DIALOG_ZU_PRUEFEN_IST}}</li></ul>
+
+  <h2>Was trägt</h2>
+  <ul class="liste"><li>{{HOECHSTENS_DREI_ZEILEN}}</li></ul>
+
+  <p class="fuss">Apfel liest nur und ändert nichts. Apples Gestaltungsregeln live:
+    <a href="https://developer.apple.com/design/human-interface-guidelines">developer.apple.com/design/human-interface-guidelines</a>
+    · Aufwand S bis zwei Stunden, M ein Tag, L mehrere Tage oder ein gemeinsamer Baustein. Entschieden wird im Team.</p>
+</main>
+</body>
+</html>

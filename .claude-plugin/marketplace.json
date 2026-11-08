@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "apfelkern",
+  "description": "Apfel, der Prüfstand für Arbeitsdialoge im Browser.",
+  "owner": {
+    "name": "Hans M."
+  },
+  "plugins": [
+    {
+      "name": "apfel",
+      "description": "Prüft Browser-Dialoge in drei Baugruppen gegen Apples HIG (live) und den Maßstab des eigenen Projekts.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Hans M."
+      },
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/rdo2hellowelt/apfelkern",
+      "license": "MIT"
+    }
+  ]
+}

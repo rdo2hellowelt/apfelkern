@@ -1,0 +1,2 @@
+●  Apfel
+   prüft Arbeitsdialoge gegen Apples Gestaltungsregeln, live.
