@@ -1,5 +1,7 @@
 # apfelkern
 
+**English** · [Deutsch](README.de.md)
+
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │  ●  APFEL                                                Drawing No. APF-01  │
@@ -28,7 +30,7 @@ reference dialog in your own house.
 > Numbers, not adjectives. That's the whole trick.
 
 Apfel speaks German. Its reports, commands and profiles are in German; the terms in *italics* below
-are the words you'll see in the output.
+are the words you'll see in the output. A short German README is in [README.de.md](README.de.md).
 
 ---
 
