@@ -2,6 +2,8 @@
 
 **English** · [Deutsch](README.de.md)
 
+![Example finding: one play button, three findings, sorted by weight](docs/beispiel-play.en.svg)
+
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │  ●  APFEL                                                Drawing No. APF-01  │
@@ -148,6 +150,7 @@ developer.apple.com. Tested on macOS; notes for Windows are in the skill.
 ```text
 apfelkern/
 ├─ .claude-plugin/        plugin.json · marketplace.json
+├─ docs/                  example images for this README
 └─ skills/apfel/
    ├─ SKILL.md            §0 start · §1 subject · §2 states · §3 checks
    │                      §4 extras · §5 report · §6 profiles · §7 explainer

@@ -2,6 +2,8 @@
 
 [English](README.md) · **Deutsch**
 
+![Beispielbefund: ein Play-Knopf, drei Befunde, nach Gewicht sortiert](docs/beispiel-play.de.svg)
+
 **Apfel ist ein Skill für Claude Code.** Er prüft Dialoge im Browser, in denen Menschen arbeiten:
 Masken, Tabellen, Formulare, Speichern. Jeder Befund nennt seine Quelle. Das ist eine Zeile im
 Code, eine Seite in Apples Human Interface Guidelines oder ein Vorbild im eigenen Projekt.

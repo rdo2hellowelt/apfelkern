@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-label="APFEL · BEISPIELBEFUND: Play-Knopf in einer Abspielleiste · erfunden">
+<rect width="1200" height="600" fill="#ffffff"/>
+<rect x="16.5" y="16.5" width="1167" height="567" fill="none" stroke="#1d1d1f" stroke-width="1"/>
+<text x="40" y="50" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700" letter-spacing="1.5" fill="#1d1d1f">● APFEL · BEISPIELBEFUND</text>
+<text x="1160" y="50" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#6e6e73">Play-Knopf in einer Abspielleiste · erfunden</text>
+<line x1="16" y1="70" x2="1184" y2="70" stroke="#1d1d1f"/>
+<line x1="700" y1="70" x2="700" y2="530" stroke="#1d1d1f"/>
+<line x1="16" y1="530" x2="1184" y2="530" stroke="#1d1d1f"/>
+<text x="40" y="98" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.5" fill="#6e6e73">DRAUFSICHT</text>
+<text x="730" y="98" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="1.5" fill="#6e6e73">GEWICHTUNG</text>
+<rect x="60" y="150" width="600" height="96" rx="14" fill="none" stroke="#1d1d1f" stroke-width="1.5"/>
+<circle cx="130" cy="198" r="22" fill="#f5f5f7" stroke="#86868b"/>
+<path d="M138 188 L124 198 L138 208 Z M124 188 L124 208" fill="#1d1d1f" stroke="#1d1d1f" stroke-width="2"/>
+<circle cx="270" cy="198" r="22" fill="#f5f5f7" stroke="#86868b"/>
+<path d="M262 188 L276 198 L262 208 Z M276 188 L276 208" fill="#1d1d1f" stroke="#1d1d1f" stroke-width="2"/>
+<circle cx="200" cy="198" r="32" fill="#ffffff" stroke="#999999" stroke-width="1.5"/>
+<path d="M191 182 L216 198 L191 214 Z" fill="none" stroke="#999999" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="200" cy="198" r="39" fill="none" stroke="#1d1d1f" stroke-width="1.2" stroke-dasharray="10 4 2 4"/>
+<line x1="330" y1="198" x2="535" y2="198" stroke="#d2d2d7" stroke-width="4" stroke-linecap="round"/>
+<line x1="330" y1="198" x2="400" y2="198" stroke="#86868b" stroke-width="4" stroke-linecap="round"/>
+<circle cx="400" cy="198" r="7" fill="#fff" stroke="#86868b" stroke-width="1.5"/>
+<text x="640" y="203" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#6e6e73">0:42 / 3:15</text>
+<line x1="146" y1="129" x2="172" y2="168" stroke="#1d1d1f" stroke-width="1"/>
+<rect x="135" y="107" width="22" height="22" fill="#fff" stroke="#1d1d1f" stroke-width="1.5"/><text x="146" y="122.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#1d1d1f">1</text>
+<line x1="200" y1="123" x2="200" y2="159" stroke="#1d1d1f" stroke-width="1"/>
+<rect x="189" y="101" width="22" height="22" fill="#fff" stroke="#1d1d1f" stroke-width="1.5"/><text x="200" y="116.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#1d1d1f">2</text>
+<line x1="254" y1="129" x2="228" y2="168" stroke="#1d1d1f" stroke-width="1"/>
+<rect x="243" y="107" width="22" height="22" fill="#fff" stroke="#1d1d1f" stroke-width="1.5"/><text x="254" y="122.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#1d1d1f">3</text>
+<line x1="430" y1="122" x2="466" y2="122" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="474" y="126" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#6e6e73">Stand</text>
+<line x1="540" y1="122" x2="576" y2="122" stroke="#1d1d1f" stroke-width="1.2" stroke-dasharray="10 4 2 4"/>
+<text x="584" y="126" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" fill="#6e6e73">Vorschlag</text>
+<rect x="60" y="280" width="22" height="22" fill="#fff" stroke="#1d1d1f" stroke-width="1.5"/><text x="71" y="295.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#1d1d1f">1</text>
+<text x="96" y="296" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="1.2" fill="#1d1d1f">BREMSE<tspan font-weight="400" fill="#6e6e73" letter-spacing="0">   Haus 1:1 · S</tspan></text>
+<text x="96" y="318" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#1d1d1f">Play auf einem neuen Album ersetzt die Warteschlange ohne Frage.</text>
+<text x="96" y="337" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#1d1d1f">Die Warteschlange ist Arbeit. Vorher fragen oder Rückgängig anbieten.</text>
+<rect x="60" y="358" width="22" height="22" fill="#fff" stroke="#1d1d1f" stroke-width="1.5"/><text x="71" y="373.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#1d1d1f">2</text>
+<text x="96" y="374" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="1.2" fill="#1d1d1f">MOTOR<tspan font-weight="400" fill="#6e6e73" letter-spacing="0">   Haus 1:1 · S</tspan></text>
+<text x="96" y="396" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#1d1d1f">Kein Drückzustand. Der Ton kommt erst nach 400 ms.</text>
+<text x="96" y="415" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#1d1d1f">Den Ladezustand sofort am Knopf zeigen.</text>
+<rect x="60" y="436" width="22" height="22" fill="#fff" stroke="#1d1d1f" stroke-width="1.5"/><text x="71" y="451.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#1d1d1f">3</text>
+<text x="96" y="452" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="1.2" fill="#1d1d1f">FAHRWERK<tspan font-weight="400" fill="#6e6e73" letter-spacing="0">   plus · tief hängend · S</tspan></text>
+<text x="96" y="474" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#1d1d1f">Nur Symbol, #999 auf #fff = 2,85:1. Bedienelemente brauchen 3:1.</text>
+<text x="96" y="493" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#1d1d1f">Dunklere Linie, aria-label „Abspielen“, sichtbarer Fokus.</text>
+<text x="730" y="160" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="34" font-weight="700" fill="#1d1d1f">1</text>
+<text x="776" y="146" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#1d1d1f">Bremse</text>
+<text x="776" y="167" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#6e6e73">verlorene Arbeit wiegt am meisten</text>
+<rect x="1060" y="132" width="100" height="26" rx="13" fill="#1d1d1f" stroke="#1d1d1f"/>
+<text x="1110" y="150" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#fff">Haus 1:1</text>
+<line x1="730" y1="184" x2="1160" y2="184" stroke="#d2d2d7"/>
+<text x="730" y="232" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="34" font-weight="700" fill="#1d1d1f">2</text>
+<text x="776" y="218" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#1d1d1f">Motor</text>
+<text x="776" y="239" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#6e6e73">jeder Klick spürt es</text>
+<rect x="1060" y="204" width="100" height="26" rx="13" fill="#1d1d1f" stroke="#1d1d1f"/>
+<text x="1110" y="222" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#fff">Haus 1:1</text>
+<line x1="730" y1="256" x2="1160" y2="256" stroke="#d2d2d7"/>
+<text x="730" y="304" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="34" font-weight="700" fill="#1d1d1f">3</text>
+<text x="776" y="290" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#1d1d1f">Fahrwerk</text>
+<text x="776" y="311" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" fill="#6e6e73">lesbar, auffindbar</text>
+<rect x="1060" y="276" width="100" height="26" rx="13" fill="#fff" stroke="#1d1d1f"/>
+<text x="1110" y="294" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#1d1d1f">plus</text>
+<line x1="730" y1="328" x2="1160" y2="328" stroke="#d2d2d7"/>
+<text x="730" y="392" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" fill="#1d1d1f">Ein Knopf, drei Befunde. Der Bericht sortiert sie:</text>
+<text x="730" y="414" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" fill="#1d1d1f">Haus 1:1 vor plus, dann Bremse vor</text>
+<text x="730" y="436" font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" fill="#1d1d1f">Motor vor Fahrwerk.</text>
+<text x="40" y="562" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6e6e73">Nicht vom Bildschirm gemessen: 2,85:1 aus scripts/kontrast.py · HIG: buttons, feedback, accessibility</text>
+</svg>
