@@ -48,6 +48,7 @@ Raster 1700 × 1060, Zeichenfläche im Rahmen von 20 bis 1680 und 20 bis 1040. D
 ```js
 starten(function(){
  begin('sh1'); rahmen();                       // Blattrand, Zonen 1–8 und A–F, Mittenmarken
+ sprache('en');                                // nur für ein englisches Blatt, sonst weglassen
  hinweise('(Untertitel)', ['Ziel: …', 'Steht: …', 'Offen: …']);   // oben links, Blocksatz
  /* Hauptansicht in der Mitte, Details links, Zeitachse und Schnitte unten, Tabellen rechts */
  legende(1330, y, 340, [['voll','durch'],['offen','offen'],['schraffiert','Störung'],['K','Schritt']], 'Text …');
@@ -58,6 +59,8 @@ starten(function(){
 
 - **Schriftfeld** belegt x 1320 bis 1680, y 962 bis 1040. Darüber nichts zeichnen. Die Legende braucht rund 120 darüber;
   ist der Platz rechts voll, die Linienarten als zwei Zeilen in die Hinweise oben links schreiben.
+- **Sprache:** Deutsch ohne Aufruf. `sprache('en')` gleich nach `rahmen()` stellt die festen Wörter um: Hinweise,
+  Allgemeine Hinweise, alle Felder im Schriftfeld. Die eigenen Texte schreibt der Block ZEICHNUNG in derselben Sprache.
 - **Hinweise oben links:** was das Blatt zeigt, was steht, was offen ist. Erst was geht, dann der Vorbehalt.
 - **Hauptansicht** (Draufsicht) mit Schnittlinie A–A, wenn ein Weg zählt; der Schnitt steht unten mit denselben
   Buchstaben an den Enden.
@@ -93,7 +96,7 @@ Linien bleiben dünn. Nur Grau, bewusst nur hell.
 
 - Keine Namen, keine Kürzel von Personen, keine Hostnamen und keine internen Pfade. Rollen statt Personen (Betrieb,
   Prüfung). Die Marke steht im Schriftfeld unter „Verantw. Abt.“ (Feld `abt`).
-- Jede Zahl mit Fundstelle, die Tabelle Quellen nennt sie. Interne Blätter heißen „liegen bei mir“.
+- Jede Zahl mit Fundstelle, die Tabelle Quellen nennt sie. Interne Unterlagen stehen dort als „intern“.
 - Keine Lücken markieren, nach denen keiner fragt. Keine Selbstkorrektur auf dem Blatt: es trägt den Stand.
 - Keine erfundenen Maße. Proportionen schematisch, Zahlen nur, wenn sie belegt sind.
 
@@ -107,7 +110,8 @@ untertitel)`, `detailRef(…)`, `xbox(x, y, w, h)`, `notes(liste)`, `table(x, y,
 **BLATT** (Birne): `nk(x, y, kennung)` Kästchen, das mitwächst · `zwei(x, y, w, h, a, b)` zwei Zeilen im Kasten ·
 `absatz(x, y, w, text, klasse, zeilenabstand)` Blocksatz, gibt das y darunter zurück · `rahmen()` ·
 `hinweise(untertitel, absätze, breite)` · `legende(x, y, w, arten, text)` mit den Arten `voll`, `offen`,
-`platzhalter`, `schraffiert`, `grau` oder einer Kennung · `schriftfeld(felder)` · `tusche()` · `starten(fn)`.
+`platzhalter`, `schraffiert`, `grau` oder einer Kennung · `schriftfeld(felder)` · `sprache(code)` mit `de` oder `en` ·
+`tusche()` · `starten(fn)`.
 
 Eine Gruppe verschieben, ohne jede Zahl anzufassen: `{const keep=sv; sv=mk('g',{transform:'translate(0,-36)'}); … sv=keep;}`.
 `tusche()` überzeichnet auch dort richtig.
@@ -118,6 +122,7 @@ Eine Gruppe verschieben, ohne jede Zahl anzufassen: `{const keep=sv; sv=mk('g',{
 |---|---|
 | `assets/blatt-vorlage.html` | Blatt mit WERKZEUG, BLATT und als Muster die erfundene Probe Ende zu Ende |
 | `references/din.md` | Die Normen kurz: Blatt, Schriftfeld, Linienarten, Schrift |
+| `evals/evals.json` | Prüffälle: wann Birne greift, wann nicht |
 | `QUELLEN.md` | Herkunft, Lizenzen, Änderungen |
 | `LICENSE` | MIT, für Birne selbst |
 | `LICENSES/` | MIT-Text des Zeichenwerkzeugs |

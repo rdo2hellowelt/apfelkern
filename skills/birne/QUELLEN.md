@@ -18,6 +18,9 @@ diff -r ../birnenkern/skills/birne skills/birne && echo gleich
 
 ## Änderungen
 
+- **13.11.2026, 1.1.0.** `sprache('en')` für englische Blätter: Hinweise, Allgemeine Hinweise und Schriftfeld.
+  Prüffälle in `evals/evals.json`. Ungenutztes CSS aus Apfels früherem HTML-Kopf entfernt. Interne Unterlagen heißen
+  in der Tabelle Quellen „intern“. Icon für das Plugin (`.claude-plugin/icon.png`).
 - **13.11.2026, veröffentlicht als birnenkern 1.0.0.** Muster auf eine erfundene Probe umgestellt (Ausleihe einer
   Stadtbibliothek), Links auf example.org. Schriftfeld ohne voreingestellte Abteilung, die Marke kommt über `abt`.
   Apfel trägt eine Kopie und zeichnet seine Befunde damit, statt eines eigenen Blatts.

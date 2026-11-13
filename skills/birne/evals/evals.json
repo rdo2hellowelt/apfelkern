@@ -1,0 +1,53 @@
+{
+  "skill_name": "birne",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "birne",
+      "expected_output": "Skill greift über den Kurznamen. Ohne Stoff fragt Birne in wenigen Sätzen, was aufs Blatt soll und woher der Stoff kommt, und nennt die Arten (Aufbau mit Wegen, Ablauf mit Zeitpunkten, Probe oder Befund, Projektstand). Schreibt noch keine Datei.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "zeichne das als Blatt: unser Deployment von Git bis Produktion, Stoff steht in docs/deploy.md",
+      "expected_output": "Skill greift. Liest docs/deploy.md, nimmt nur belegte Zahlen, baut birne-<thema>-<datum>.html aus assets/blatt-vorlage.html mit Draufsicht und Schnitt A–A entlang des Wegs, Tabelle Quellen nennt docs/deploy.md. Blöcke WERKZEUG und BLATT unverändert. Rendert einmal, bessert einmal nach, öffnet die Datei.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "birne: der Ausfall gestern von 14 bis 16 Uhr, Protokoll in incident.log",
+      "expected_output": "Skill greift. Zeitachse mit fester Skala, Störung schraffiert, Ereignisse mit Kennung, Uhrzeiten nur aus incident.log. Keine Namen aus dem Protokoll auf dem Blatt, Rollen statt Personen, keine Hostnamen.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Mach mir ein Balkendiagramm mit den Umsätzen pro Monat",
+      "expected_output": "Birne greift nicht: Zahlenreihen als Diagramm sind ausgeschlossen. Verweis auf ein Werkzeug für Diagramme.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Ich brauche fünf Folien für das Kundenmeeting morgen",
+      "expected_output": "Birne greift nicht: Folien sind ausgeschlossen.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Tusche: wie bekomme ich Tintenflecken aus einem Hemd?",
+      "expected_output": "Birne greift nicht, obwohl das Wort Tusche fällt: es geht um keinen Stoff für ein Blatt. Antwort ohne Skill.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "technisches Blatt auf Englisch: Aufbau unseres Login-Dienstes, Stoff im README",
+      "expected_output": "Skill greift. Ruft sprache('en') gleich nach rahmen() auf, schreibt die eigenen Texte auf Englisch, Schriftfeld mit englischen Feldnamen und Spr. EN. Sonst wie üblich.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "birne: Projektstand Umzug der Datenbank, Tickets DB-12 bis DB-19, Wartezeit beim Betrieb ohne Datum",
+      "expected_output": "Skill greift. Stand mit Wartepunkten, Tickets in der Tabelle, offene Schritte mit Strich-Punkt. Was ohne Datum oder Beleg ist, kommt ohne Zahl aufs Blatt; nichts wird geschätzt oder erfunden. Keine Selbstkorrektur auf dem Blatt.",
+      "files": []
+    }
+  ]
+}

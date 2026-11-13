@@ -23,6 +23,9 @@
 
 ## Änderungen
 
+- **13.11.2026, 1.2.0:** Birne 1.1.0 nachgezogen (englische Blätter mit `sprache('en')`, Prüffälle, CSS
+  aufgeräumt). Prüfung `.github/workflows/birne-abgleich.yml` vergleicht `skills/birne` bei jedem Push und
+  wöchentlich mit birnenkern und wird rot, wenn die Kopie abweicht. Icon `.claude-plugin/icon.png`.
 - **13.11.2026, Apfel trägt Birne (1.1.0):** Das Plugin bringt Birne als `skills/birne` mit, Datei für Datei gleich
   mit https://github.com/rdo2hellowelt/birnenkern. Die Befundzeichnung baut auf Birnes Blatt (Rahmen mit Zonen,
   Schriftfeld unten rechts, Blocksatz); `assets/zeichnung-vorlage.html` ist entfallen, es gibt nur noch ein Blatt.

@@ -1,0 +1,31 @@
+# Birne liegt hier als Kopie (skills/birne). Die Quelle ist birnenkern.
+# Diese Prüfung wird rot, sobald die Kopie von birnenkern abweicht.
+name: Birne-Abgleich
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  abgleich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: rdo2hellowelt/birnenkern
+          path: _birnenkern
+      - name: Kopie gegen birnenkern vergleichen
+        run: |
+          if diff -r _birnenkern/skills/birne skills/birne; then
+            echo "Birne in apfelkern ist gleich mit birnenkern."
+          else
+            echo "::error::skills/birne weicht von birnenkern ab. Nachziehen: rsync -a --delete ../birnenkern/skills/birne/ skills/birne/"
+            exit 1
+          fi

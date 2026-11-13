@@ -149,8 +149,9 @@ developer.apple.com. Tested on macOS; notes for Windows are in the skill.
 
 ```text
 apfelkern/
-├─ .claude-plugin/        plugin.json · marketplace.json
-├─ docs/                  example images for this README
+├─ .claude-plugin/        plugin.json · marketplace.json · icon.png
+├─ .github/workflows/     birne-abgleich: the Birne copy must match birnenkern
+├─ docs/                  example images for this README, icon source
 └─ skills/apfel/
    ├─ SKILL.md            §0 start · §1 subject · §2 states · §3 checks
    │                      §4 extras · §5 report · §6 profiles · §7 explainer
