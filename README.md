@@ -2,7 +2,7 @@
 
 **English** · [Deutsch](README.de.md)
 
-![Example finding: one play button, three findings, sorted by weight](docs/beispiel-play.en.svg)
+![Findings drawing on the Birne sheet: one play button, three findings, sorted by weight](docs/beispiel-play.en.png)
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────┐

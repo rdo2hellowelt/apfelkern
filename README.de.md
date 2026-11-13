@@ -2,7 +2,7 @@
 
 [English](README.md) · **Deutsch**
 
-![Beispielbefund: ein Play-Knopf, drei Befunde, nach Gewicht sortiert](docs/beispiel-play.de.svg)
+![Befundzeichnung auf dem Blatt von Birne: ein Play-Knopf, drei Befunde, nach Gewicht sortiert](docs/beispiel-play.de.png)
 
 **Apfel ist ein Skill für Claude Code.** Er prüft Dialoge im Browser, in denen Menschen arbeiten:
 Masken, Tabellen, Formulare, Speichern. Jeder Befund nennt seine Quelle. Das ist eine Zeile im
