@@ -5,7 +5,7 @@
 | Apple Human Interface Guidelines, https://developer.apple.com/design/human-interface-guidelines/ | live, je Seite als `<seite>.md` | Apple, keine Weitergabe-Lizenz | nur Seitennamen und ein eigener Satz zum Zweck (`references/hig-seiten.md`); Inhalt wird bei Bedarf geladen, nie abgelegt |
 | taste-skill, https://github.com/Leonxlnx/taste-skill | `12af471`, 25.10.2026 | MIT, `LICENSES/MIT-leonxlnx-taste-skill.txt` | Regeln aus `references/app-screens.md` §7, 8, 10, 11, 13, 14, verdichtet und übersetzt (`references/arbeitsmasken.md`) |
 | emilkowalski/skills, https://github.com/emilkowalski/skills | `70744e3`, 27.07.2026 | MIT, `LICENSES/MIT-emilkowalski-skills.txt` | Regeln aus `emil-design-eng` und `apple-design`, verdichtet und übersetzt (`references/bewegung.md`) |
-| dimensional-drawing, https://github.com/enesozturk/dimensional-drawing | Zip des Hauptzweigs, 07.11.2026, ohne Commit-Angabe | MIT, `LICENSES/MIT-enesozturk-dimensional-drawing.txt` | Zeichenstil (Grau, Strichsprache, Ansichten, Kopf) und Zeichenwerkzeug aus `examples/dialog-sheet.html`, angepasst an Befunde statt Maße (`assets/zeichnung-vorlage.html`) |
+| dimensional-drawing, https://github.com/enesozturk/dimensional-drawing | Zip des Hauptzweigs, 07.11.2026, ohne Commit-Angabe | MIT, `LICENSES/MIT-enesozturk-dimensional-drawing.txt` | Zeichenstil (Grau, Strichsprache, Ansichten, Kopf) und Zeichenwerkzeug aus `examples/dialog-sheet.html`, angepasst an Befunde statt Maße; seit 1.1.0 über Birne (`skills/birne`) |
 
 ## Bewusst nicht übernommen
 
@@ -23,6 +23,11 @@
 
 ## Änderungen
 
+- **13.11.2026, Apfel trägt Birne (1.1.0):** Das Plugin bringt Birne als `skills/birne` mit, Datei für Datei gleich
+  mit https://github.com/rdo2hellowelt/birnenkern. Die Befundzeichnung baut auf Birnes Blatt (Rahmen mit Zonen,
+  Schriftfeld unten rechts, Blocksatz); `assets/zeichnung-vorlage.html` ist entfallen, es gibt nur noch ein Blatt.
+  Birne wird nur in birnenkern geändert und hier nachgezogen:
+  `rsync -a --delete ../birnenkern/skills/birne/ skills/birne/`, dann `diff -r ../birnenkern/skills/birne skills/birne`.
 - **08.11.2026, Kern und Profile getrennt:** Eigene Profile liegen jetzt in `~/Documents/Apfel/profile/`,
   nicht mehr im Skill; mitgeliefert sind nur `vorlage.md` und das erfundene `beispiel.md`. Skripte
   werden über `<skill>` aufgerufen, den Basisordner, den Claude Code beim Laden nennt, damit Apfel als

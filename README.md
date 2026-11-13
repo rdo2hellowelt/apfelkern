@@ -82,7 +82,7 @@ From the made-up "Kundenkartei" (customer file) app that ships as an example
 | `apfel` | Greeting and menu: known project, your own project, profiles, feeling lucky |
 | `apfel <dialog>` | Full review with a contact sheet per station |
 | `apfel kurz <dialog>` | Short: verdict, numbers and the top three suggestions |
-| `apfel zeichnung <dialog>` | Review plus a **findings drawing** (*Befundzeichnung*): one sheet like a technical dimension drawing, with top view, exploded view, section and details |
+| `apfel zeichnung <dialog>` | Review plus a **findings drawing** (*Befundzeichnung*): one technical sheet after DIN, drawn with [Birne](https://github.com/rdo2hellowelt/birnenkern), which ships inside this plugin |
 | `apfel profil` | View, create, check and swap profiles |
 | `apfel erklären` | Builds a page from `SKILL.md` that shows how Apfel works |
 | `apfel verbessern` | Suggests changes to the skill, from what came up during a run |
@@ -160,10 +160,11 @@ apfelkern/
    │                      profil_pruefen.py  every code location against Git
    │                      zufall_hig.py      "feeling lucky"
    │                      erklaeren.py       explainer page from SKILL.md
-   ├─ assets/             templates: report · findings drawing · explainer
+   ├─ assets/             templates: report · explainer
    ├─ evals/evals.json    11 test cases: when it triggers, when it doesn't
    ├─ QUELLEN.md          origin, date and license of every source
    └─ LICENSE · LICENSES/
+└─ skills/birne/         copy of Birne from birnenkern: the sheet for the findings drawing
 ```
 
 ## Thanks

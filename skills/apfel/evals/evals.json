@@ -58,7 +58,7 @@
     {
       "id": 10,
       "prompt": "apfel zeichnung: das Auftragsformular in der Kundenkartei auf Zweig feature/auftrag",
-      "expected_output": "Prüft wie üblich, Bericht im Terminal, danach ohne Rückfrage die Befundzeichnung aus assets/zeichnung-vorlage.html: Block WERKZEUG unverändert, nur Grau, Kästchen mit den Nummern aus dem Bericht in der Draufsicht, Explosionsansicht oder Schnitt nur, wenn Ebenen oder ein Weg zählen, keine erfundenen Maße. Legt apfel-zeichnung-<dialog>-<datum>.html im Apfel-Ordner ab und öffnet sie.",
+      "expected_output": "Prüft wie üblich, Bericht im Terminal, danach ohne Rückfrage die Befundzeichnung aus Birnes Blatt (<skill>/../birne/assets/blatt-vorlage.html): Blöcke WERKZEUG und BLATT unverändert, Rahmen und Schriftfeld unten rechts, nur Grau, Kästchen mit den Nummern aus dem Bericht in der Draufsicht, Explosionsansicht oder Schnitt nur, wenn Ebenen oder ein Weg zählen, keine erfundenen Maße. Legt apfel-zeichnung-<dialog>-<datum>.html im Apfel-Ordner ab und öffnet sie.",
       "files": []
     },
     {

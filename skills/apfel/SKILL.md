@@ -237,15 +237,15 @@ Terminal.
 Apfel-Ordner bauen, wie oben in der Vorlage beschrieben. Je Spalte ein Bild oder zwei bis vier Zeilen; für plus ohne
 Aufnahme höchstens eine schlichte SVG-Skizze.
 
-**Befundzeichnung:** ein Blatt, das zeigt, wo die Vorschläge im Dialog sitzen und welchen Weg sie nehmen, im Stil
-der Maßzeichnungen, die Apple für Zubehör veröffentlicht. Aus `assets/zeichnung-vorlage.html` eine Datei
-`apfel-zeichnung-<dialog>-<JJJJ-MM-TT>.html` im Apfel-Ordner bauen. Kopf (`header.tb`, dazu `<title>`) aus dem
-Bericht: Dialog, Stand im Zweig, Hausmaßstab, Quelle, Hinweise, Kennzahlen. Die Fußzeile verlinkt die Seite zum
-Lesen, wenn es sie gibt. Im Skript bleibt der Block WERKZEUG, wie er ist (`rr`, `hat`, `ar`, `dimH`, `dimV`,
-`callout`, `nb`, `slotLabel`, `title`, `detailRef`, `xbox`, `notes`, `table`); der Block ZEICHNUNG wird neu
-geschrieben. Das Beispiel darin, das Auftragsformular der Kundenkartei, ist das Muster. Das Blatt misst
-1700 × 1060: Hinweise oben links, Explosionsansicht darunter, Draufsicht in der Mitte, Tabellen rechts, unten
-Schnitt und Details.
+**Befundzeichnung:** ein Blatt, das zeigt, wo die Vorschläge im Dialog sitzen und welchen Weg sie nehmen. Das Blatt
+kommt von Birne, die im Plugin neben Apfel liegt (`<skill>/../birne/`): erst `<skill>/../birne/SKILL.md` lesen, dann
+aus `<skill>/../birne/assets/blatt-vorlage.html` eine Datei `apfel-zeichnung-<dialog>-<JJJJ-MM-TT>.html` im
+Apfel-Ordner bauen. Es gelten Birnes Regeln (Rahmen, Hinweise oben links, Schriftfeld unten rechts, Linienarten,
+Blocksatz, `tusche()` als Letztes); die Blöcke WERKZEUG und BLATT bleiben, wie sie sind, der Block ZEICHNUNG wird
+neu geschrieben. Die Hinweise oben links tragen Dialog, Stand im Zweig, Hausmaßstab und das Urteil, das Schriftfeld
+Quelle, Status und Datum. Draufsicht in der Mitte, Explosionsansicht oder Details links, Schnitt unten, rechts die
+Tabellen Vorschläge, Fundstellen, Apple-Seiten und Offen für den Klickweg. Fehlt der Ordner `birne`, die
+Befundzeichnung nicht anbieten.
 
 - **Nur Grau, die Striche tragen die Bedeutung.** Voll = Stand im Zweig, Strich-Punkt (`vor`) = Vorschlag,
   gestrichelt (`slot`) = Platzhalter, schraffiert (`hat`) = gesperrt, fehlt oder überschrieben, grau (`hug`) = Knopf
@@ -254,7 +254,7 @@ Schnitt und Details.
   aus dem Dialog nur, wenn der Vorschlag daran hängt, etwa ein Feld oder ein Reiter.
 - **Keine erfundenen Maße.** Proportionen schematisch. Zahlen nur, wenn sie im Code stehen (`col-4`, neun Felder),
   sonst Worte: hug, flex, fill.
-- **Nummern wie im Bericht.** Jeder Vorschlag ist ein Kästchen (`nb`) an seiner Stelle in der Draufsicht, mit
+- **Nummern wie im Bericht.** Jeder Vorschlag ist ein Kästchen (`nb` oder `nk`) an seiner Stelle in der Draufsicht, mit
   derselben Nummer in Hinweisen und Tabellen.
 - **Ansichten nach Bedarf.** Draufsicht immer, mit Detailkreisen. Explosionsansicht, wenn Ebenen zählen
   (Unterdialog, Auswahl, modaler Dialog, der Weg einer Taste). Schnitt, wenn ein Weg zählt (Speichern, Prüfung im
@@ -395,7 +395,6 @@ Feste Texte der Seite stehen in der Vorlage.
 | `scripts/erklaeren.py` | Erklärblatt aus dieser Datei bauen (§7) |
 | `assets/erklaer-vorlage.html` | Vorlage des Erklärblatts mit Platzhaltern `{{…}}` |
 | `assets/bericht-vorlage.html` | Seite zum Lesen für den Bericht, mit Kontaktabzug je Station |
-| `assets/zeichnung-vorlage.html` | Befundzeichnung: Werkzeug, Kopf und als Muster das Auftragsformular der Kundenkartei |
 | `begruessung.txt` | Begrüßung beim Start |
 | `evals/evals.json` | Prüffälle: wann der Skill greift, wann nicht |
 | `QUELLEN.md` | Herkunft, Stand, Lizenzen, Änderungen |

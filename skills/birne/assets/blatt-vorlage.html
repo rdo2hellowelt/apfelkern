@@ -1,0 +1,360 @@
+<title>Probe Ende zu Ende</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;700&display=swap">
+<!-- Birne: Blatt nach DIN, Tusche auf Weiß. Zeichenwerkzeug nach „dimensional-drawing“, Copyright (c) 2026 Enes Ozturk, MIT-Lizenz (LICENSES/MIT-enesozturk-dimensional-drawing.txt). -->
+<style>
+/* Layout: ein Blatt wie eine Maßzeichnung (Rahmen mit Zonen · Draufsicht · Details · Zeitachse · Schnitt · Tabellen · Schriftfeld unten rechts), Tusche auf Weiß, bewusst nur hell. */
+:root{--paper:#ececec;--sheet:#ffffff;--ink:#111111;--ink2:#444444;--ink3:#7a7a7a;--fill:#f3f3f3;--fill2:#e6e6e6;--f:'DIN 1451 Mittelschrift','Alte DIN 1451 Mittelschrift','DIN Mittelschrift','DIN Alternate','Bahnschrift','Barlow Semi Condensed','Helvetica Neue',Arial,sans-serif;color-scheme:light}
+body{background:var(--paper);color:var(--ink);font-family:var(--f);margin:0}
+.wrap{max-width:1760px;margin:0 auto;padding-block:24px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.scroll{overflow-x:auto;background:var(--sheet);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+svg{display:block;width:100%;height:auto}
+@media (max-width:700px){svg{min-width:1100px}}
+.tb{background:var(--sheet);border:1.2px solid var(--ink);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;margin-bottom:24px}
+.tb>div{border-right:.8px solid var(--ink);border-bottom:.8px solid var(--ink);padding:10px 14px;min-width:0}
+.tb>div:nth-child(4),.tb>div:nth-child(7){border-right:0}
+.tb .big{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;gap:12px;container-type:inline-size}
+.tb h1{font-size:clamp(22px,3vw,40px);font-size:clamp(20px,7.4cqi,44px);overflow-wrap:anywhere;line-height:1;margin:4px 0 0;font-weight:400;letter-spacing:.1em;text-transform:uppercase;text-wrap:balance}
+.lbl{text-transform:uppercase;font-size:9.5px;font-weight:400;letter-spacing:.06em;color:var(--ink2)}
+.tb .v{font-size:13px;margin-top:2px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.tb .big .v{font-size:11px;color:var(--ink2);line-height:1.6}
+.tb .notes{grid-column:1/-1;border-right:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 24px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);line-height:1.9}
+.tb .notes ol{margin:4px 0 0;padding-left:20px}
+.tb .nh{font-weight:700;font-size:13px;letter-spacing:.06em}
+.tb .nh span{font-weight:400;font-size:11.5px;margin-left:6px}
+.tb .figs{grid-column:1/-1;border-right:0;border-bottom:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px 18px}
+.tb .figs>div{border-left:.8px solid var(--ink);padding-left:14px}
+.tb .figs>div:first-child{border-left:0;padding-left:0}
+.tb .figs .v{font-size:18px;letter-spacing:.06em;text-transform:none;margin-top:4px}
+@media (max-width:640px){.tb{grid-template-columns:1fr 1fr}.tb .big{grid-column:1/-1;grid-row:auto}.tb>div:nth-child(4),.tb>div:nth-child(7){border-right:.8px solid var(--ink)}}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);padding:10px 2px 0}
+.foot b{font-weight:700;color:var(--ink)}
+/* Zeichnung */
+.border{fill:none;stroke:var(--ink);stroke-width:1.2}
+.obj{fill:var(--sheet);stroke:var(--ink);stroke-width:1.3;stroke-linejoin:round}
+.obj1{fill:var(--sheet);stroke:var(--ink);stroke-width:1}
+.well{fill:var(--fill);stroke:var(--ink);stroke-width:1}
+.slot{fill:var(--sheet);stroke:var(--ink2);stroke-width:.8;stroke-dasharray:4 3}
+.hug{fill:var(--fill2);stroke:var(--ink);stroke-width:1}
+.thin{fill:none;stroke:var(--ink);stroke-width:.8}
+.ph{fill:none;stroke:var(--ink3);stroke-width:.8;stroke-dasharray:14 3 3 3}
+.cl{fill:none;stroke:var(--ink3);stroke-width:.7;stroke-dasharray:16 3 2 3}
+.cut{fill:none;stroke:var(--ink);stroke-width:2}
+.dl{stroke:var(--ink);stroke-width:.7;fill:none}
+.ext{stroke:var(--ink);stroke-width:.55;fill:none}
+.arrow{fill:var(--ink)}
+.hl{stroke:var(--ink2);stroke-width:.7}
+.hs{stroke:var(--ink);stroke-width:.8}
+.vor{fill:var(--sheet);stroke:var(--ink);stroke-width:1;stroke-dasharray:10 3 2 3}
+.vor2{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:4 2}
+.file{fill:var(--sheet);stroke:var(--ink);stroke-width:1.2;stroke-linejoin:round}
+.dt{font:400 11px var(--f);fill:var(--ink);paint-order:stroke;stroke:var(--sheet);stroke-width:4px;stroke-linejoin:round}
+.dts{font:400 9.5px var(--f);fill:var(--ink2);letter-spacing:.06em;text-transform:uppercase;paint-order:stroke;stroke:var(--sheet);stroke-width:3px}
+.sl{font:400 9px var(--f);fill:var(--ink2);letter-spacing:.08em;text-transform:uppercase}
+.slk{font:400 9px var(--f);fill:var(--ink);letter-spacing:.08em;text-transform:uppercase;paint-order:stroke;stroke:var(--sheet);stroke-width:3px;stroke-linejoin:round}
+.star{font:700 15px var(--f);fill:var(--ink)}
+.nt{font:400 11.5px var(--f);fill:var(--ink);letter-spacing:.06em;text-transform:uppercase}
+.nth{font:700 13px var(--f);fill:var(--ink);letter-spacing:.06em}
+.vt{font:400 12px var(--f);fill:var(--ink);letter-spacing:.1em;text-transform:uppercase}
+.vtb{font:400 20px var(--f);fill:var(--ink);letter-spacing:.06em}
+.nb{fill:var(--sheet);stroke:var(--ink);stroke-width:.9}
+.nbt{font:400 9.5px var(--f);fill:var(--ink)}
+.lead{stroke:var(--ink);stroke-width:.7;fill:none}
+.dot{fill:var(--ink)}
+.th{font:400 10.5px var(--f);fill:var(--ink);letter-spacing:.05em;text-transform:uppercase}
+.tc{font:400 10.5px var(--f);fill:var(--ink)}
+a text{text-decoration:underline}
+a:focus-visible text{font-weight:700}
+/* Druck: ein Blatt A3 quer zum Aufhängen */
+@media print{
+ @page{size:A3 landscape;margin:7mm}
+ body{background:#fff}
+ .wrap{max-width:none;padding:0}
+ .tb{margin-bottom:8px;break-inside:avoid}
+ .tb .notes{line-height:1.5}
+ .scroll{box-shadow:none;overflow:visible;break-inside:avoid}
+ .scroll svg{width:86%;min-width:0;margin:0 auto}
+}
+/* Tusche: eckig, überzeichnete Kanten, Zonen am Rand, Schriftfeld nach DIN EN ISO 7200 */
+svg rect{rx:0;ry:0}
+.os{stroke:var(--ink);fill:none;stroke-linecap:round}
+.zn{font:400 9px var(--f);fill:var(--ink2);letter-spacing:.08em}
+.sf{fill:none;stroke:var(--ink);stroke-width:.6}
+.sfo{fill:none;stroke:var(--ink);stroke-width:1.2}
+.sfl{font:400 6.5px var(--f);fill:var(--ink2);letter-spacing:.06em;text-transform:uppercase}
+.sfv{font:400 8.5px var(--f);fill:var(--ink);letter-spacing:.04em;text-transform:uppercase}
+.sfb{font:400 12px var(--f);fill:var(--ink);letter-spacing:.1em;text-transform:uppercase}
+</style>
+<div class="wrap">
+  <div class="scroll"><svg id="sh1" viewBox="0 0 1700 1060" role="img" aria-label="Werkzeichnung, Beispiel erfunden: Probe Ende zu Ende der Ausleihe einer Stadtbibliothek im Rahmen mit Zonen. Draufsicht des Aufbaus mit Katalog-App, Gateway, Ausleih-API, Bestand, Journal und Ablage hinter der Sperre nach außen, Detail Sperre mit Regelfolge, Detail Ausleihe ohne Beleg, Zeitachse des 14.04. mit zwei Störungen, Schnitt durch Ausleihe und Rückgabe, Detail Wiederherstellen, Tabellen mit Schritten, Befunden und Tickets, Kennwerten und Quellen, allgemeine Hinweise und Schriftfeld unten rechts"></svg></div>
+</div>
+
+<script>
+(function(){
+/* ===== WERKZEUG: unverändert lassen ===== */
+const NS='http://www.w3.org/2000/svg';let sv,A,HAT,uid=0;
+function mk(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)if(a[k]!=null)e.setAttribute(k,a[k]);(p||sv).appendChild(e);return e}
+function tx(x,y,s,c,a,p){const t=mk('text',Object.assign({x:x,y:y,class:c||'dt'},a||{}),p);t.textContent=s;return t}
+function rr(x,y,w,h,r,c){return mk('rect',{x:x,y:y,width:w,height:h,rx:r,class:c})}
+function hat(x,y,w,h,r){const e=mk('rect',{x:x,y:y,width:w,height:h,rx:r||0,class:'hs'});e.setAttribute('fill',HAT);return e}
+function begin(id){sv=document.getElementById(id);sv.innerHTML='';const n=uid++;const d=mk('defs',{});
+ const m=mk('marker',{id:'ar'+n,viewBox:'0 0 10 10',refX:10,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse',markerUnits:'userSpaceOnUse'},d);mk('path',{d:'M0,1.7 L10,5 L0,8.3 z',class:'arrow'},m);
+ const pt=mk('pattern',{id:'hat'+n,width:5,height:5,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'},d);mk('line',{x1:0,y1:0,x2:0,y2:5,class:'hl'},pt);
+ A='url(#ar'+n+')';HAT='url(#hat'+n+')';rr(20,20,1660,1020,16,'border')}
+function ar(x1,y1,x2,y2,c){return mk('line',{x1:x1,y1:y1,x2:x2,y2:y2,class:c||'dl','marker-end':A})}
+function dimH(x1,x2,y,e1,e2,l,o){o=o||{};[[x1,e1],[x2,e2]].forEach(([x,e])=>{if(e==null)return;const s=Math.sign(y-e)||1;mk('line',{x1:x,y1:e+s*3,x2:x,y2:y+s*5,class:'ext'})});
+ if(x2-x1>=28)mk('line',{x1:x1,y1:y,x2:x2,y2:y,class:'dl','marker-start':A,'marker-end':A});else{mk('line',{x1:x1-13,y1:y,x2:x1,y2:y,class:'dl','marker-end':A});mk('line',{x1:x2+13,y1:y,x2:x2,y2:y,class:'dl','marker-end':A});mk('line',{x1:x1,y1:y,x2:x2,y2:y,class:'dl'})}
+ tx((x1+x2)/2+(o.dx||0),(o.below?y+13:y-4)+(o.dy||0),l,o.c||'dt',{'text-anchor':'middle'})}
+function dimV(y1,y2,x,e1,e2,l,o){o=o||{};[[y1,e1],[y2,e2]].forEach(([y,e])=>{if(e==null)return;const s=Math.sign(x-e)||1;mk('line',{x1:e+s*3,y1:y,x2:x+s*5,y2:y,class:'ext'})});
+ mk('line',{x1:x,y1:y1,x2:x,y2:y2,class:'dl','marker-start':A,'marker-end':A});
+ const c=(y1+y2)/2;if(o.side){const r=o.side==='r';tx(r?x+6:x-6,c+4,l,o.c||'dt',{'text-anchor':r?'start':'end'})}else tx(x-5,c,l,o.c||'dt',{'text-anchor':'middle',transform:'rotate(-90 '+(x-5)+' '+c+')'})}
+function callout(px,py,ex,ey,l,dir,c){const s=dir||(ex>=px?1:-1);mk('circle',{cx:px,cy:py,r:1.8,class:'dot'});mk('polyline',{points:px+','+py+' '+ex+','+ey+' '+(ex+s*10)+','+ey,class:'lead'});tx(ex+s*14,ey+4,l,c||'dt',{'text-anchor':s>0?'start':'end'})}
+function nb(x,y,n){mk('rect',{x:x-6,y:y-6,width:12,height:12,class:'nb'});tx(x,y+3.5,String(n),'nbt',{'text-anchor':'middle'})}
+function slotLabel(x,y,w,h,l,al,c){tx(al==='l'?x+6:x+w/2,y+h/2+3.2,l,c||'sl',{'text-anchor':al==='l'?'start':'middle'})}
+function title(x,y,t,s){tx(x,y,t,'vt',{'text-anchor':'middle'});if(s)tx(x,y+14,s,'dts',{'text-anchor':'middle'})}
+function detailRef(cx,cy,r,lbl,lx,ly){mk('circle',{cx:cx,cy:cy,r:r,class:'ph'});const a=Math.atan2(ly-cy,lx-cx);mk('line',{x1:cx+r*Math.cos(a),y1:cy+r*Math.sin(a),x2:lx,y2:ly,class:'lead'});tx(lx+(lx<cx?-4:4),ly+4,lbl,'dts',{'text-anchor':lx<cx?'end':'start'})}
+function xbox(x,y,w,h){mk('rect',{x:x,y:y,width:w,height:h,class:'thin'});mk('path',{d:'M'+x+','+y+' l'+w+','+h+' M'+(x+w)+','+y+' l'+(-w)+','+h,class:'thin'})}
+function notes(list){const NX=50,NY=58;tx(NX,NY,'HINWEISE:','nth');tx(NX+92,NY,'(Befunde, Nummern wie im Bericht)','nt');
+ list.forEach(([n,t],i)=>{const y=NY+30+i*24;if(n){nb(NX+6,y-4,n);tx(NX+22,y,t,'nt')}else tx(NX,y,t,'nt')})}
+function table(x,y,ttl,head,rows,ws,al){const rh=17;tx(x,y-8,ttl,'vt');
+ [head].concat(rows).forEach((r,i)=>{let cx=x;r.forEach((c,j)=>{mk('rect',{x:cx,y:y+i*rh,width:ws[j],height:rh,class:'thin'});
+  const left=al&&al[j]==='l',at={'text-anchor':left?'start':'middle'},px=left?cx+6:cx+ws[j]/2,py=y+i*rh+12;
+  if(c&&typeof c==='object'){const a=mk('a',{href:c.href,target:'_blank',rel:'noopener'});tx(px,py,c.t,'tc',at,a)}else tx(px,py,c,i?'tc':'th',at);cx+=ws[j]})});
+ return y+(rows.length+1)*rh+36}
+
+/* ===== BLATT: unverändert lassen (Birne) ===== */
+/* Kästchen mit Kennung, wächst mit der Länge; gibt die Breite zurück */
+function nk(x,y,s){s=String(s);const w=Math.max(12,s.length*6+6);mk('rect',{x:x-w/2,y:y-6,width:w,height:12,class:'nb'});tx(x,y+3.5,s,'nbt',{'text-anchor':'middle'});return w}
+/* zwei Zeilen mittig in einem Kasten */
+function zwei(x,y,w,h,a,b){tx(x+w/2,y+h/2-2,a,'sl',{'text-anchor':'middle'});tx(x+w/2,y+h/2+10,b,'sl',{'text-anchor':'middle'})}
+/* Textlänge wie gezeichnet: manche Browser zählen den Buchstabenabstand nicht mit, dann wird er dazugerechnet */
+let LSK=null;
+function laenge(t){const L=t.getComputedTextLength();
+ if(LSK===null){const p=tx(0,-50,'MMMMMMMMMM','dts');const a=p.getComputedTextLength();p.style.letterSpacing='0px';LSK=Math.abs(a-p.getComputedTextLength())<.5;p.remove()}
+ return LSK?L+(parseFloat(getComputedStyle(t).letterSpacing)||0)*t.textContent.length:L}
+/* Absatz im Blocksatz: Zeilen füllen, alle außer der letzten fest auf die Breite (textLength), keine Zeile länger als w;
+   gibt das y unter dem Absatz zurück */
+function absatz(x,y,w,text,cls,lh){const m=tx(x,y,'',cls);const lines=[];let cur='';
+ text.split(' ').forEach(wd=>{const c=cur?cur+' '+wd:wd;m.textContent=c;if(laenge(m)>w&&cur){lines.push(cur);cur=wd}else cur=c});
+ if(cur)lines.push(cur);m.remove();
+ lines.forEach((l,i)=>{const t=tx(x,y+i*lh,l,cls);
+  if((i<lines.length-1&&l.indexOf(' ')>0)||laenge(t)>w){t.setAttribute('textLength',w);t.setAttribute('lengthAdjust','spacing')}});
+ return y+lines.length*lh}
+/* Rahmen: Blattrand, Zonen 1 bis 8 und A bis F, Mittenmarken (nach begin aufrufen) */
+function rahmen(){const X0=20,Y0=20,W=1660,H=1020,nx=8,ny=6;
+ mk('rect',{x:2,y:2,width:1696,height:1056,class:'thin'});
+ for(let i=0;i<=nx;i++){const x=X0+i*W/nx;
+  if(i>0&&i<nx){mk('line',{x1:x,y1:Y0-9,x2:x,y2:Y0,class:'thin'});mk('line',{x1:x,y1:Y0+H,x2:x,y2:Y0+H+9,class:'thin'})}
+  if(i<nx){const cx=X0+(i+.5)*W/nx;tx(cx,14,String(i+1),'zn',{'text-anchor':'middle'});tx(cx,1053,String(i+1),'zn',{'text-anchor':'middle'})}}
+ for(let j=0;j<=ny;j++){const y=Y0+j*H/ny;
+  if(j>0&&j<ny){mk('line',{x1:X0-9,y1:y,x2:X0,y2:y,class:'thin'});mk('line',{x1:X0+W,y1:y,x2:X0+W+9,y2:y,class:'thin'})}
+  if(j<ny){const cy=Y0+(j+.5)*H/ny+3,c='ABCDEF'[j];tx(11,cy,c,'zn',{'text-anchor':'middle'});tx(1689,cy,c,'zn',{'text-anchor':'middle'})}}
+ [[X0+W/2,2,X0+W/2,Y0+10],[X0+W/2,Y0+H-10,X0+W/2,1058],[2,Y0+H/2,X0+10,Y0+H/2],[X0+W-10,Y0+H/2,1698,Y0+H/2]].forEach(([a,b,c,d])=>mk('line',{x1:a,y1:b,x2:c,y2:d,class:'cut'}))}
+/* Hinweise oben links: Überschrift, Absätze im Blocksatz; gibt das y unter dem letzten Absatz zurück */
+function hinweise(sub,absaetze,w){const NX=50,W=w||500;tx(NX,58,'HINWEISE:','nth');if(sub)tx(NX+92,58,sub,'nt');
+ let y=88;absaetze.forEach(a=>{y=absatz(NX,y,W,a,'nt',19)+6});return y}
+/* Allgemeine Hinweise mit Linienarten, rechts über dem Schriftfeld; arten: [[art,wort]], art = voll|offen|schraffiert|kennung */
+function legende(x,y,w,arten,text){tx(x,y,'Allgemeine Hinweise','vt');let lx=x;const ly=y+18;
+ arten.forEach(([a,l])=>{
+  if(a==='voll')mk('line',{x1:lx,y1:ly,x2:lx+28,y2:ly,class:'obj1'});
+  else if(a==='offen')mk('line',{x1:lx,y1:ly,x2:lx+28,y2:ly,class:'vor'});
+  else if(a==='platzhalter')mk('line',{x1:lx,y1:ly,x2:lx+28,y2:ly,class:'slot'});
+  else if(a==='schraffiert')hat(lx,ly-6,26,12,0);
+  else if(a==='grau')rr(lx,ly-6,26,12,0,'hug');
+  else nk(lx+8,ly,a.slice(0,2));
+  const t=tx(lx+34,ly+3,l,'dts');lx+=34+t.getComputedTextLength()+16});
+ return text?absatz(x,y+44,w,text,'dts',14):y+30}
+/* Schriftfeld nach DIN EN ISO 7200, klein, unten rechts im Rahmen */
+function schriftfeld(f){const X=1320,Y=962,W=360,H=78;
+ const cell=(x,y,w,h,l,v)=>{mk('rect',{x:x,y:y,width:w,height:h,class:'sf'});tx(x+4,y+8,l,'sfl');
+  if(v){const t=tx(x+4,y+h-6,v,'sfv');if(t.getComputedTextLength()>w-7){t.setAttribute('textLength',w-7);t.setAttribute('lengthAdjust','spacingAndGlyphs')}}};
+ cell(X,Y,80,22,'Verantw. Abt.',f.abt||'');cell(X+80,Y,100,22,'Quelle',f.quelle);
+ cell(X+180,Y,90,22,'Dokumentenart',f.art||'Werkzeichnung');cell(X+270,Y,90,22,'Dokumentenstatus',f.status);
+ cell(X,Y+22,270,34,'Titel, zusätzlicher Titel','');tx(X+4,Y+43,f.titel,'sfb');if(f.zusatz)tx(X+4,Y+53,f.zusatz,'sfv');
+ cell(X+270,Y+22,90,34,'Sachnummer',f.nr);
+ cell(X,Y+56,80,22,'Maßstab',f.massstab);cell(X+80,Y+56,70,22,f.refLabel||'Stand',f.ref);cell(X+150,Y+56,30,22,'Änd.',f.aend);
+ cell(X+180,Y+56,90,22,'Ausgabedatum',f.datum);cell(X+270,Y+56,30,22,'Spr.',f.spr||'de');cell(X+300,Y+56,60,22,'Blatt',f.blatt||'1/1');
+ mk('rect',{x:X,y:Y,width:W,height:H,class:'sfo'})}
+/* Tusche: keine Rundungen, Körperkanten leicht überzeichnet (als Letztes aufrufen); in Gruppen mit transform im selben Koordinatensystem */
+function tusche(){sv.querySelectorAll('rect').forEach(r=>{r.removeAttribute('rx');r.removeAttribute('ry')});
+ sv.querySelectorAll('rect.obj,rect.obj1,rect.hug,rect.well,rect.border,rect.hs').forEach(r=>{
+  if(r.closest('pattern,defs'))return;
+  const x=+r.getAttribute('x'),y=+r.getAttribute('y'),w=+r.getAttribute('width'),h=+r.getAttribute('height');if(!w||!h)return;
+  const e=r.classList.contains('border')?9:Math.min(5,Math.max(2.5,Math.min(w,h)*.14)),sw=getComputedStyle(r).strokeWidth;
+  [[x-e,y,x,y],[x+w,y,x+w+e,y],[x-e,y+h,x,y+h],[x+w,y+h,x+w+e,y+h],[x,y-e,x,y],[x,y+h,x,y+h+e],[x+w,y-e,x+w,y],[x+w,y+h,x+w,y+h+e]]
+   .forEach(([a,b,c,d])=>mk('line',{x1:a,y1:b,x2:c,y2:d,class:'os','stroke-width':sw,'vector-effect':'non-scaling-stroke'},r.parentNode))})}
+/* Erst zeichnen, wenn die Schrift da ist, sonst misst der Blocksatz mit der Ersatzschrift */
+function starten(fn){const F=document.fonts;
+ (F&&F.load?Promise.all(["400 11px 'Barlow Semi Condensed'","700 13px 'Barlow Semi Condensed'"].map(s=>F.load(s).catch(()=>null))).then(()=>F.ready):Promise.resolve()).then(fn,fn)}
+
+/* ===== ZEICHNUNG: je Blatt neu. Beispiel (erfunden): Probe Ende zu Ende, Ausleihe einer Stadtbibliothek, Rev B ===== */
+const TK='https://example.org/tickets/',L=id=>({t:id,href:TK+id});
+starten(function(){
+begin('sh1');rahmen();
+
+/* ---- HINWEISE oben links, Blocksatz ---- */
+hinweise('(Probe auf dem Testserver, 13. und 14.04.2026 · Beispiel erfunden)',[
+ 'Ziel: den Testbestand ohne echte Leser auf den Testserver einspielen, dann Sperre, Gateway, Ausleihe aus der Katalog-App und Beleg im Journal prüfen.',
+ 'Steht: Sperre, Anmeldung, Ausleihe, Rückgabe und Wiederherstellen sind durch. Zwei Störungen sind schraffiert und behoben, der eine Befund hat ein Ticket.',
+ 'Offen: M Logs und O Rückweg, beide beim Betrieb.']);
+
+/* ---- DRAUFSICHT · Aufbau auf dem Testserver ---- */
+{const HX=770,HY=110,HW=400,HH=360,WX=1192;
+ dimH(HX,HX+HW,90,HY,HY,'Testbestand ohne echte Leser · aufgebaut in A bis E',{c:'dts'});
+ rr(HX,HY,HW,HH,0,'obj');tx(HX+12,HY+18,'Testserver','dts');
+ mk('line',{x1:HX+1,y1:HY+28,x2:HX+HW-1,y2:HY+28,class:'ph'});nk(HX+HW-22,HY+14,'A–E');
+ rr(782,150,56,308,0,'hug');tx(814,304,'Gateway · fünf Eingänge','sl',{'text-anchor':'middle',transform:'rotate(-90 814 304)'});nk(810,442,'G');
+ rr(870,150,130,56,0,'obj');zwei(870,150,130,56,'Ausleih-API','nur lokal');
+ ar(838,178,868,178,'dl');
+ rr(870,250,110,108,0,'obj');tx(925,266,'Bestand','sl',{'text-anchor':'middle'});
+ rr(878,276,94,22,0,'slot');slotLabel(878,276,94,22,'Medien · 120');
+ rr(878,304,94,22,0,'slot');slotLabel(878,304,94,22,'Leser · 8');
+ nk(898,342,'I');nk(918,342,'W');nk(938,342,'N');
+ ar(925,206,925,248,'dl');tx(931,232,'Suche','dts');
+ rr(1030,250,120,56,0,'obj');zwei(1030,250,120,56,'Journal','Buchung · Beleg');nk(1140,262,'L');
+ mk('polyline',{points:'995,206 995,278 1028,278',class:'dl','marker-end':A});
+ rr(1030,330,120,100,0,'obj');tx(1090,346,'Ablage','sl',{'text-anchor':'middle'});
+ hat(1040,356,100,22,0);slotLabel(1040,356,100,22,'Ordner belege',null,'slk');
+ hat(1040,384,100,22,0);slotLabel(1040,384,100,22,'Ordner mahnung',null,'slk');
+ tx(1090,422,'fehlten bis 17:34','dts',{'text-anchor':'middle'});
+ ar(1090,306,1090,328,'dl');
+ ar(1000,162,1208,162,'dl');tx(1085,157,'Anmeldung','dts',{'text-anchor':'middle'});
+ ar(1000,194,1208,194,'dl');tx(1085,208,'Gebühr buchen','dts',{'text-anchor':'middle'});
+ [[114,152],[172,184],[204,470]].forEach(([a,b])=>mk('line',{x1:WX,y1:a,x2:WX,y2:b,class:'cut'}));
+ tx(WX-6,108,'Sperre','dts',{'text-anchor':'end'});nk(WX+10,104,'F');
+ rr(1210,149,88,26,0,'hug');slotLabel(1210,149,88,26,'Anmeldung ×2');nk(1314,162,'H');
+ rr(1210,181,88,26,0,'hug');slotLabel(1210,181,88,26,'Bezahldienst');
+ tx(1254,221,'503 · 11:33 bis 13:45','dts',{'text-anchor':'middle'});
+ [['Verbund',240],['Mailserver',270],['Internet',300]].forEach(([n,y])=>{rr(1210,y,88,24,0,'slot');xbox(1216,y+6,12,12);tx(1236,y+16,n,'sl')});
+ tx(1254,340,'abgewiesen','dts',{'text-anchor':'middle'});
+ rr(1210,392,88,40,0,'vor');zwei(1210,392,88,40,'M · Logs','O · Rückweg');
+ tx(1254,448,'offen · Betrieb','dts',{'text-anchor':'middle'});
+ rr(610,150,110,62,0,'obj');zwei(610,150,110,62,'Katalog-App','Testinstanz');
+ ar(720,168,780,168,'dl');tx(750,163,'Ausleihe','dts',{'text-anchor':'middle'});
+ ar(720,200,780,200,'dl');tx(750,195,'Rückgabe','dts',{'text-anchor':'middle'});
+ nk(630,228,'J');nk(648,228,'K');nk(670,228,'K2');
+ mk('line',{x1:598,y1:182,x2:1318,y2:182,class:'cl'});
+ [598,1318].forEach(x=>{ar(x,182,x,200,'dl');tx(x,218,'A','vtb',{'text-anchor':'middle'})});
+ title(965,506,'Draufsicht · Aufbau auf dem Testserver','Schematisch · Sperre nach außen aktiv');}
+
+/* ---- DETAIL A · Sperre nach außen ---- */
+{const x0=60,y0=246,RX=176,RW=236;
+ rr(x0,y0+30,84,28,0,'hug');slotLabel(x0,y0+30,84,28,'Ausleih-API');nk(x0+42,y0+76,'F');
+ ar(x0+84,y0+44,RX-2,y0+44,'dl');
+ [['1 · zulassen · Anmeldung 1',0],['2 · zulassen · Anmeldung 2',0],['3 · zulassen · Bezahldienst',0],['4 · abweisen · alles Neue nach außen',1]].forEach(([l,h],i)=>{
+  const y=y0+i*26;
+  if(h){hat(RX,y,RW,20,0);slotLabel(RX,y,RW,20,l,'l','slk');mk('line',{x1:RX+RW,y1:y+10,x2:RX+RW+18,y2:y+10,class:'dl'});mk('line',{x1:RX+RW+18,y1:y+3,x2:RX+RW+18,y2:y+17,class:'cut'});tx(RX+RW+26,y+14,'abgewiesen','dts')}
+  else{rr(RX,y,RW,20,0,'obj1');slotLabel(RX,y,RW,20,l,'l');ar(RX+RW,y+10,RX+RW+24,y+10,'dl');tx(RX+RW+30,y+14,'frei','dts')}});
+ absatz(x0,y0+124,480,'Zulassen steht vor dem Abweisen, sonst scheitern Anmeldung und Gebühr. Geprüft an der Wirkung: Verbund, Mailserver und Internet werden abgewiesen.','dts',14);
+ title(300,y0+170,'Detail A · Sperre nach außen','Schritt F · aktiv seit 14.04. 16:31');}
+
+/* ---- DETAIL D · Ausleihe ohne Beleg ---- */
+{const x0=60,y1=466,y2=504;
+ const row=(y,q,g,e,h)=>{rr(x0,y,150,24,0,'slot');slotLabel(x0,y,150,24,q);ar(x0+150,y+12,x0+176,y+12,'dl');
+  rr(x0+178,y,96,24,0,'hug');slotLabel(x0+178,y,96,24,g);ar(x0+274,y+12,x0+300,y+12,'dl');
+  if(h){hat(x0+302,y,110,24,0);slotLabel(x0+302,y,110,24,e,null,'slk')}else{rr(x0+302,y,110,24,0,'hug');slotLabel(x0+302,y,110,24,e)}};
+ row(y1,'Gescannt · Q 12/3','Bestand · 1','Belegt',0);
+ row(y2,'Getippt · Q 12/3','Bestand · 1','Ohne Beleg',1);
+ nk(x0+432,y2+12,'K2');
+ const yy=absatz(x0,y2+44,412,'Von Hand getippt hängt ein Leerzeichen an der Signatur. Die Buchung läuft, der Beleg findet das Medium nicht. Die Katalog-App bleibt, wie sie ist.','dts',14);
+ rr(x0,yy-4,412,22,0,'vor');slotLabel(x0,yy-4,412,22,'Behebung in der API: Leerzeichen am Eingang entfernen','l');
+ title(300,yy+40,'Detail D · Ausleihe ohne Beleg','Erste Ausleihe eines neuen Lesers');}
+
+/* ---- ZEITACHSE · 14.04.2026, 1 h = 148 ---- */
+{const T=h=>150+(h-10.5)*148,yb=740,yh=716,LV=[0,694,672,650];
+ rr(60,yh,72,24,0,'hug');slotLabel(60,yh,72,24,'13.04.');tx(96,yb+18,'A–E · H · I · J','dts',{'text-anchor':'middle'});
+ hat(T(11+33/60),yh,T(13.75)-T(11+33/60),24,0);slotLabel(T(11+33/60),yh,T(13.75)-T(11+33/60),24,'Bezahldienst 503 · keine Gebühr',null,'slk');
+ hat(T(17+7/60),yh,T(17+34/60)-T(17+7/60),24,0);slotLabel(T(17+7/60),yh,T(17+34/60)-T(17+7/60),24,'Ordner',null,'slk');
+ mk('line',{x1:T(10.5),y1:yb,x2:T(18),y2:yb,class:'cut'});
+ for(let h=11;h<=18;h++){const x=T(h);mk('line',{x1:x,y1:yb,x2:x,y2:yb+6,class:'thin'});tx(x,yb+18,h+':00','dts',{'text-anchor':'middle'})}
+ const ev=(t,lv,k,l,s)=>{const x=T(t),y=LV[lv];mk('circle',{cx:x,cy:yb,r:2.2,class:'dot'});
+  mk('line',{x1:x,y1:yb,x2:x,y2:y+6,class:'lead'});let w=0;if(k)w=nk(x,y,k);else mk('circle',{cx:x,cy:y+4,r:1.8,class:'dot'});
+  tx(s>0?x+w/2+6:x-w/2-6,y+4,l,'dts',{'text-anchor':s>0?'start':'end'})};
+ ev(11+3/60,1,'K','Recht greift',-1);
+ ev(11+33/60,2,'W','Leser angelegt',1);
+ ev(13.75,1,'','Neustart Bezahldienst',-1);
+ ev(16+31/60,1,'F','Sperre aktiv',-1);
+ ev(17+7/60,1,'L','ohne Beleg',-1);
+ ev(17+43/60,2,'L','Beleg im Journal',-1);
+ const a=T(13+55/60),b=T(14+2/60);[a,T(13+57/60),b].forEach(x=>mk('circle',{cx:x,cy:yb,r:2.2,class:'dot'}));
+ mk('line',{x1:a,y1:yh-12,x2:b,y2:yh-12,class:'dl'});[a,b].forEach(x=>mk('line',{x1:x,y1:yh-16,x2:x,y2:yb,class:'ext'}));
+ mk('polyline',{points:((a+b)/2)+','+(yh-12)+' 704,664 714,664',class:'lead'});
+ [['I','13:55 Q 12/3 mit Beleg'],['K2','13:57 ohne Beleg'],['N','14:02 Wiederherstellen']].forEach(([k,l],i)=>{const y=650+i*16;nk(730,y,k);tx(744,y+4,l,'dts')});
+ rr(1266,yh,40,24,0,'vor');slotLabel(1266,yh,40,24,'M · O');
+ title(705,790,'Zeitachse · 14.04.2026','Ortszeit · schraffiert = Störung des Tages');}
+
+/* ---- SCHNITT A–A · Ausleihe und Rückgabe ---- */
+{const y1=860,y2=934,h=30;
+ tx(70,y1+22,'A','vtb',{'text-anchor':'middle'});tx(556,y1+22,'A','vtb',{'text-anchor':'middle'});
+ const B=(x,y,w,l,c)=>{if(c==='hat'){hat(x,y,w,h,0);slotLabel(x,y,w,h,l,null,'slk')}else{rr(x,y,w,h,0,c);slotLabel(x,y,w,h,l)}};
+ B(96,y1,86,'Katalog-App','hug');ar(182,y1+15,204,y1+15,'cut');
+ B(206,y1,56,'Gateway','hug');ar(262,y1+15,284,y1+15,'cut');
+ B(286,y1,86,'Ausleih-API','obj1');ar(372,y1+15,420,y1+15,'cut');
+ mk('line',{x1:396,y1:y1-10,x2:396,y2:y1+7,class:'cut'});mk('line',{x1:396,y1:y1+23,x2:396,y2:y1+h+8,class:'cut'});
+ B(422,y1,100,'Bezahldienst','hug');
+ dimH(96,522,y1-14,y1,y1,'Buchung 2,4 s bis zur Quittung',{c:'dts'});
+ mk('polyline',{points:'472,'+(y1+h)+' 472,'+(y1+h+14)+' 139,'+(y1+h+14)+' 139,'+(y1+h+2),class:'dl','marker-end':A});
+ tx(306,y1+h+28,'Quittung mit Beleg','dts',{'text-anchor':'middle'});
+ B(96,y2,86,'Rückgabe','hug');ar(182,y2+15,204,y2+15,'cut');
+ B(206,y2,56,'Gateway','hug');ar(262,y2+15,284,y2+15,'cut');
+ B(286,y2,86,'Ausleih-API','obj1');ar(372,y2+15,398,y2+15,'cut');
+ B(400,y2,86,'Journal','obj1');ar(486,y2+15,510,y2+15,'cut');
+ B(512,y2,110,'Ablage','obj1');hat(622,y2,14,h,0);
+ nk(84,y2+15,'L');
+ tx(443,y2+h+14,'Beleg 1 von 1','dts',{'text-anchor':'middle'});
+ tx(567,y2+h+14,'Ordner fehlten bis 17:34','dts',{'text-anchor':'middle'});
+ title(410,1004,'Schnitt A–A · Ausleihe und Rückgabe','Schritt L, zweiter Lauf 17:43');}
+
+/* ---- DETAIL C · Wiederherstellen ---- */
+{const y=866,w=88,g=10;let x=806;
+ const S=[['Bestand weg','obj1'],['120 Medien weg','obj1'],['leer · 0','well'],['neu geladen','obj1'],['Q 12/3 belegt','hug']];
+ S.forEach(([l,c],i)=>{rr(x,y,w,30,0,c);slotLabel(x,y,w,30,l);if(i<S.length-1)ar(x+w,y+15,x+w+g,y+15,'cut');x+=w+g});
+ dimH(806,992,y-16,y,y,'je Medium ein Aufruf',{c:'dts'});nk(1276,y-16,'N');
+ absatz(806,y+60,476,'Leer heißt nicht frisch: Leserkonten, Verläufe und Gebühren bleiben. Danach stehen Bestand und Medien wie vorher, die Prüfbuchung läuft wieder mit Beleg.','dts',14);
+ title(1046,1004,'Detail C · Wiederherstellen','Schritt N · 14.04. 14:02');}
+
+/* ---- TABELLEN ---- */
+{const x=1330;
+ let y=table(x,74,'Schritte',['Kz.','Was','Stand'],[
+  ['A–E','Testbestand bauen, einspielen','durch 13.04.'],
+  ['J','Katalog-App an die API','durch 13.04.'],
+  ['H','Anmeldung über Verzeichnis','durch 13.04.'],
+  ['I0–I2','Bestand laden, 120 Medien','durch 13.04.'],
+  ['K','Ausleihe aus der App, Recht','durch 14.04.'],
+  ['W','Leserkonto für die Probe','durch 14.04.'],
+  ['I','Prüfbuchung Q 12/3','durch 14.04.'],
+  ['K2','Ausleihe von Hand','Befund'],
+  ['N','Wiederherstellen','durch 14.04.'],
+  ['F','Sperre nach außen','aktiv 14.04.'],
+  ['G','Gateway, fünf Eingänge','gelesen'],
+  ['L','Beleg im Journal','durch 14.04.'],
+  ['M','Logs auswerten','offen · Betrieb'],
+  ['O','Testserver zurück','offen · Betrieb']],[56,176,98],['c','l','l']);
+ y=table(x,y,'Befunde und Tickets',['Was','Stand','Ticket'],[
+  ['Bezahldienst 503','Neustart 13:45','Betrieb'],
+  ['Ordner fehlten','angelegt 17:34',L('T-101')],
+  ['Ausleihe ohne Beleg','Ursache gefunden',L('T-102')],
+  ['Behebung in der API','offen',L('T-103')],
+  ['Probe, Abnahme','M und O offen',L('T-100')]],[120,105,105],['l','l','l']);
+ y=table(x,y,'Kennwerte',['Was','Wert'],[
+  ['Bestand laden','120 Medien · 310 ms'],
+  ['Wiederherstellen, löschen','rund 2 s'],
+  ['Ausleihe mit Gebühr','Buchung 2,4 s'],
+  ['Belege im Journal','1 von 1'],
+  ['Ausnahmen der Sperre','3']],[150,180],['l','l']);
+ table(x,y,'Quellen',['Was','Woher'],[
+  ['Zeiten, Kennwerte','Probe-Protokolle, erfunden'],
+  ['Betrieb, Sperre','Kommentare an der Probe'],
+  ['Ursache Beleg','Analyse am Ticket'],
+  ['Belege','Journal der Probe']],[110,220],['l','l']);}
+
+/* ---- ALLGEMEINE HINWEISE und SCHRIFTFELD unten rechts ---- */
+legende(1330,778,330,[['voll','durch'],['offen','offen'],['schraffiert','Störung'],['K','Schritt']],
+ 'Nicht vom Bildschirm messen, Kästen schematisch. Kennungen wie in der Tabelle Schritte. Uhrzeiten vom 14.04.2026, Ortszeit. Rollen statt Namen: Betrieb am Server, Prüfung im Browser. Beispiel erfunden, Bibliothek und Zahlen ebenso.');
+schriftfeld({abt:'Muster',quelle:'Protokolle, Tickets',status:'Stand 14.04.',titel:'Probe Ende zu Ende',zusatz:'Ausleihe der Stadtbibliothek, 13. und 14.04.2026',
+ nr:'BIB-AUSL-PROBE-01',massstab:'1:1 Testbestand',refLabel:'Fassung',ref:'2.4.0',aend:'B',datum:'2026-04-15'});
+tusche();
+});
+})();
+</script>
