@@ -23,6 +23,10 @@
 
 ## Änderungen
 
+- **16.11.2026, Abgleich auf Birne 1.1.0 festgelegt:** Apfel behält die kleine Birne, schwarz-weiß. Den Modus bunt
+  aus birnenkern 1.2.0 zieht Apfel nicht nach; wer ihn will, installiert Birne dazu. `birne-abgleich.yml` vergleicht
+  `skills/birne` deshalb mit birnenkern 1.1.0 (Commit `7ccea9d`), nicht mit dem neuesten Stand.
+
 - **13.11.2026, 1.2.0:** Birne 1.1.0 nachgezogen (englische Blätter mit `sprache('en')`, Prüffälle, CSS
   aufgeräumt). Prüfung `.github/workflows/birne-abgleich.yml` vergleicht `skills/birne` bei jedem Push und
   wöchentlich mit birnenkern und wird rot, wenn die Kopie abweicht. Icon `.claude-plugin/icon.png`.

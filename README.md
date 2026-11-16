@@ -150,7 +150,7 @@ developer.apple.com. Tested on macOS; notes for Windows are in the skill.
 ```text
 apfelkern/
 ├─ .claude-plugin/        plugin.json · marketplace.json · icon.png
-├─ .github/workflows/     birne-abgleich: the Birne copy must match birnenkern
+├─ .github/workflows/     birne-abgleich: the Birne copy must match birnenkern 1.1.0
 ├─ docs/                  example images for this README, icon source
 └─ skills/apfel/
    ├─ SKILL.md            §0 start · §1 subject · §2 states · §3 checks
@@ -165,7 +165,7 @@ apfelkern/
    ├─ evals/evals.json    11 test cases: when it triggers, when it doesn't
    ├─ QUELLEN.md          origin, date and license of every source
    └─ LICENSE · LICENSES/
-└─ skills/birne/         copy of Birne from birnenkern: the sheet for the findings drawing
+└─ skills/birne/         the small Birne (birnenkern 1.1.0, black and white)
 ```
 
 ## Thanks

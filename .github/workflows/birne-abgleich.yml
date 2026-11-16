@@ -1,5 +1,6 @@
-# Birne liegt hier als Kopie (skills/birne). Die Quelle ist birnenkern.
-# Diese Prüfung wird rot, sobald die Kopie von birnenkern abweicht.
+# Birne liegt hier als Kopie (skills/birne): die kleine Birne, schwarz-weiß, Stand birnenkern 1.1.0.
+# Der Modus bunt (birnenkern ab 1.2.0) wird nicht nachgezogen. Diese Prüfung wird rot, sobald die Kopie
+# von birnenkern 1.1.0 abweicht.
 name: Birne-Abgleich
 
 on:
@@ -20,12 +21,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: rdo2hellowelt/birnenkern
+          ref: 7ccea9d4256fb0db5b863ab9b05d290dfb40fad8  # birnenkern 1.1.0
           path: _birnenkern
       - name: Kopie gegen birnenkern vergleichen
         run: |
           if diff -r _birnenkern/skills/birne skills/birne; then
-            echo "Birne in apfelkern ist gleich mit birnenkern."
+            echo "Birne in apfelkern ist gleich mit birnenkern 1.1.0."
           else
-            echo "::error::skills/birne weicht von birnenkern ab. Nachziehen: rsync -a --delete ../birnenkern/skills/birne/ skills/birne/"
+            echo "::error::skills/birne weicht von birnenkern 1.1.0 ab. Zurück auf 1.1.0: git -C ../birnenkern archive 7ccea9d skills/birne | tar -x"
             exit 1
           fi
